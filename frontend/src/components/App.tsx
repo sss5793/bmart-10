@@ -1,7 +1,13 @@
 import React from "react";
+import Category from "./Category";
 
 function App() {
-  return <div className="App">hello world!</div>;
+  return (
+    <div>
+      <div className="App">hello world!</div>
+      <Category></Category>
+    </div>
+  );
 }
 
 export default App;
