@@ -8,7 +8,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 
-import { Home, Category, Search } from './pages';
+import { Home, Category, Search, Menu, Cart, Login, Register } from './pages';
 
 const Routes = [
   {
@@ -22,6 +22,22 @@ const Routes = [
   {
     path: '/search',
     component: Search,
+  },
+  {
+    path: '/menu',
+    component: Menu,
+  },
+  {
+    path: '/cart',
+    component: Cart,
+  },
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    component: Register,
   },
 ];
 

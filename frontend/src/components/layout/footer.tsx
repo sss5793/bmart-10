@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from "react-router-dom";
 
 import { COLOR } from '../../constants';
 
@@ -16,10 +17,10 @@ const Layer = styled.div`
 const Footer = () => {
   return (
     <Layer>
-      <div>홈</div>
-      <div>검색</div>
-      <div>장바구니</div>
-      <div>전체메뉴</div>
+        <NavLink to='/'>홈</NavLink>
+        <NavLink to='/search'>검색</NavLink>
+        <NavLink to='/cart'>장바구니</NavLink>
+        <NavLink to='/menu'>전체메뉴</NavLink>
     </Layer>
   );
 };
