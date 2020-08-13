@@ -1,7 +1,6 @@
 import React from 'react';
-import Layout from '../components/layout';
 
-const Register = () => {
+const Register = (): JSX.Element => {
     return <div>회원가입 페이지</div>;
 };
 

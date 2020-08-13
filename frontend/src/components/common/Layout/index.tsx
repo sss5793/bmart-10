@@ -1,8 +1,8 @@
 import React, { Children } from 'react';
 import styled from 'styled-components';
 
-import Header from './header';
-import Footer from './footer';
+import Header from './Header';
+import Footer from './Footer';
 
 const Layer = styled.div`
   width: 100%;
