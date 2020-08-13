@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout';
-import Category from "../components/categoryButtonArea";
+import Category from "../components/CategoryButtonArea";
 
 const Home = () => {
   return (
