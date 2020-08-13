@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 import Svg from '../Svg';
 
-import { COLOR, SVG } from '../../../constatns/style';
-import * as ROUTES from '../../../constatns/routes';
+import { COLOR, SVG } from '../../../constants/style';
+import * as ROUTES from '../../../constants/routes';
 
 const Wrap = styled.div`
   width: 100%;
