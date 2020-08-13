@@ -1,12 +1,15 @@
 import React from 'react';
-import Layout from '../components/layout';
+import Layout from '../components/common/Layout';
 import Category from "../components/home/CategoryButtonArea";
+
 
 const Home = () => {
   return (
-    <Layout>메인 페이지
+    <Layout>
+      메인 페이지
       <Category></Category>
-    </Layout>);
+    </Layout>
+  );
 };
 
 export default Home;
