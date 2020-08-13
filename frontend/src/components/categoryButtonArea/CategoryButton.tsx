@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 type Name = {
     [key: string]: string;
-};
+}
 
 const name: Name = {
     "bread": "빵 시리얼 잼",
