@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { COLOR, SVG } from '../../constants';
+import { COLOR, SVG } from '../../../constatns/style';
 import Logo from './logo.png';
 
 const Layer = styled.div`
@@ -22,12 +22,12 @@ const Header = () => {
   return (
     <Layer>
       <Item>
-          <svg width="36px" height="36px">
-              <path fill={COLOR.WHITE} d={SVG.ARROW_BACK}/>
-          </svg>
+        <svg width={36} height="36px">
+          <path fill={COLOR.WHITE} d={SVG.ARROW_BACK} />
+        </svg>
       </Item>
       <div>
-          <img src={Logo} width={'60px'}/>
+        <img src={Logo} width={'60px'} />
       </div>
       <Item></Item>
     </Layer>

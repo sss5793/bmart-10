@@ -1,7 +1,7 @@
 import React from 'react';
-import Layout from '../components/layout';
+import { Layout } from '../components/common';
 
-const Home = () => {
+const Home = (): JSX.Element => {
   return <Layout>메인 페이지</Layout>;
 };
 

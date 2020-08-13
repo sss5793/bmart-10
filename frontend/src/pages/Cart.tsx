@@ -1,7 +1,7 @@
 import React from 'react';
-import Layout from '../components/layout';
+import { Layout } from '../components/common';
 
-const Cart = () => {
+const Cart = (): JSX.Element => {
     return <Layout>장바구니 페이지</Layout>;
 };
 
