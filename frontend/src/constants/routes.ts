@@ -1,5 +1,5 @@
 export const HOME = {
-  path: '/',
+  path: '/home',
   name: 'Home',
   title: '홈',
 };
@@ -29,7 +29,7 @@ export const CATEGORY = {
 };
 
 export const LOGIN = {
-  path: '/login',
+  path: '/',
   name: 'Login',
   title: '로그인',
 };

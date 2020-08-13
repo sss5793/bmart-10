@@ -1,10 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Home, Category, Search, Menu, Cart, Login, Register } from './pages';
 import * as ROUTES from './constants/routes';
 
-const Routes = [
+type route = {
+  path: string;
+  component: () => JSX.Element;
+};
+
+const Routes: Array<route> = [
   {
     path: ROUTES.HOME.path,
     component: Home,
@@ -25,27 +30,33 @@ const Routes = [
     path: ROUTES.CART.path,
     component: Cart,
   },
-  {
-    path: ROUTES.LOGIN.path,
-    component: Login,
-  },
-  {
-    path: ROUTES.REGISTER.path,
-    component: Register,
-  },
 ];
+
+const RouteIf = ({ component: Component, ...rest }: route) => {
+  return (
+    <Route
+      exact
+      path={rest.path}
+      render={() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          return <Component />;
+        } else {
+          return <Redirect to="/" />;
+        }
+      }}
+    />
+  );
+};
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {Routes.map((item) => (
-          <Route
-            exact
-            key={item.path}
-            path={item.path}
-            component={item.component}
-          />
+        <Route exact path={ROUTES.LOGIN.path} component={Login} />
+        <Route exact path={ROUTES.REGISTER.path} component={Register} />
+        {Routes.map((item: route) => (
+          <RouteIf key={item.path} {...item} />
         ))}
         <Route path="*">Not found</Route>
       </Switch>
