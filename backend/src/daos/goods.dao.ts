@@ -4,7 +4,7 @@ import poolOption from "./pool-option";
 
 import { Goods } from "../types/dto/goods.dto";
 
-const CREATE_GOODS = `INSERT INTO goods (\`name\`, category_name, cost, discount, amount, is_deleted, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+const CREATE_GOODS = `INSERT INTO goods (title, category_name, cost, discount, amount, image_url) VALUES (?, ?, ?, ?, ?, ?)`;
 
 class GoodsDAO extends DAO {
   constructor(option: mysql.PoolOptions) {
@@ -17,7 +17,6 @@ class GoodsDAO extends DAO {
     cost,
     discount,
     amount,
-    isDeleted,
     imageUrl,
   }: Goods) {
     const connection = await this.getConnection();
@@ -30,7 +29,6 @@ class GoodsDAO extends DAO {
         `${cost}`,
         `${discount}`,
         `${amount}`,
-        `${isDeleted ? 1 : 0}`,
         imageUrl,
       ]);
 
