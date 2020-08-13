@@ -1,42 +1,36 @@
 import React from 'react';
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Home, Category, Search, Menu, Cart, Login, Register } from './pages';
+import * as ROUTES from './constatns/routes';
 
 const Routes = [
   {
-    path: '/',
+    path: ROUTES.HOME.path,
     component: Home,
   },
   {
-    path: '/category',
+    path: ROUTES.CATEGORY.path,
     component: Category,
   },
   {
-    path: '/search',
+    path: ROUTES.SEARCH.path,
     component: Search,
   },
   {
-    path: '/menu',
+    path: ROUTES.MENU.path,
     component: Menu,
   },
   {
-    path: '/cart',
+    path: ROUTES.CART.path,
     component: Cart,
   },
   {
-    path: '/login',
+    path: ROUTES.LOGIN.path,
     component: Login,
   },
   {
-    path: '/register',
+    path: ROUTES.REGISTER.path,
     component: Register,
   },
 ];

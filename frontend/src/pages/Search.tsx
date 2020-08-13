@@ -1,7 +1,7 @@
 import React from 'react';
-import Layout from '../components/layout';
+import { Layout } from '../components/common';
 
-const Search = () => {
+const Search = (): JSX.Element => {
   return <Layout>검색 페이지</Layout>;
 };
 
