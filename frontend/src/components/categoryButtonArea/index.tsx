@@ -18,7 +18,7 @@ const Container = styled.div`
     padding: 10px;
 `;
 
-export default function Category() {
+function Category(): JSX.Element {
     return (
         <Container>
             <CategoryHeader></CategoryHeader>
@@ -32,3 +32,5 @@ export default function Category() {
         </Container>
     );
 }
+
+export default Category;
