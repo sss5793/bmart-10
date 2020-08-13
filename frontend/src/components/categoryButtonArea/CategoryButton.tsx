@@ -1,7 +1,11 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-const name: any = {
+type Name = {
+    [key: string]: string;
+}
+
+const name: Name = {
     "bread": "빵 시리얼 잼",
     "egg": "정육 수산 계란",
     "hot-dog": "분식 야식",
@@ -12,7 +16,7 @@ const name: any = {
     "snacks": "과자 초콜릿",
     "soap": "헤어 바디 세안",
     "three-lines": "더보기"
-}
+};
 
 const smallOut = keyframes`
   0% {
@@ -57,7 +61,7 @@ const ButtonTitle = styled.p`
     font-size:0.7em;
 `;
 
-function CategoryButton({ type }: { type: string }) {
+function CategoryButton({ type }: { type: string }): JSX.Element {
     const imagePath = `/asset/icon/${type}.svg`;
 
     return (
