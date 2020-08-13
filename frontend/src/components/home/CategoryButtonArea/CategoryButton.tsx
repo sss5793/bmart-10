@@ -50,8 +50,8 @@ const ButtonTitle = styled.p`
     font-size:0.7em;
 `;
 
-function CategoryButton({ key }: { key: string }): JSX.Element {
-    const imagePath = `/asset/icon/${key}.svg`;
+function CategoryButton({ keyName }: { keyName: string }): JSX.Element {
+    const imagePath = `/asset/icon/${keyName}.svg`;
 
     return (
         <ButtonWrapper>
@@ -61,7 +61,7 @@ function CategoryButton({ key }: { key: string }): JSX.Element {
                 </ButtonImgWrapper>
             </div>
             <ButtonTitle>
-                {KEY_NAME[key].name}
+                {KEY_NAME[keyName].name}
             </ButtonTitle>
         </ButtonWrapper >
     );
