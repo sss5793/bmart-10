@@ -8,7 +8,7 @@ const MiddleLine = styled.span`
     padding:10px;
 `;
 
-export default function CategoryHeader() {
+export default function CategoryHeader(): JSX.Element {
     return (
         <div>
             <span>⏰&nbsp; 배달 시간 28~39분 예상</span>
