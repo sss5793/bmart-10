@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { COLOR, SVG } from '../../../constatns/style';
+import { COLOR, SVG } from '../../../constants/style';
 import Logo from './logo.png';
 
 const Layer = styled.div`

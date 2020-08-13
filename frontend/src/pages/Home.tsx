@@ -1,8 +1,8 @@
 import React from 'react';
 import Layout from '../components/layout';
-import Category from "../components/CategoryButtonArea";
+import Category from "../components/home/CategoryButtonArea";
 
-const Home = (): JSX.Element => {
+const Home = () => {
   return (
     <Layout>메인 페이지
       <Category></Category>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { KEY_NAME } from "../../../constatns/message";
+import { KEY_NAME } from "../../../constants/message";
 
 
 type KeyName = {

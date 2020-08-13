@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Home, Category, Search, Menu, Cart, Login, Register } from './pages';
-import * as ROUTES from './constatns/routes';
+import * as ROUTES from './constants/routes';
 
 const Routes = [
   {
