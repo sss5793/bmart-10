@@ -32,7 +32,7 @@ const ButtonWrapper = styled.div`
     width:65px;
     height:65px;
 
-    &:hover {
+    &:active {
         animation-duration: 0.3s;
         animation-timing-function: ease-out;
         animation-name: ${smallOut};
@@ -53,6 +53,7 @@ const ButtonImg = styled.img`
 `;
 
 const ButtonTitle = styled.p`
+    margin-top:5px;
     font-size:0.7em;
 `;
 

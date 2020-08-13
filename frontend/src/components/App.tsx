@@ -1,11 +1,10 @@
 import React from "react";
-import Category from "./Category";
+import Router from '../router';
 
 function App() {
   return (
-    <div>
-      <div className="App">hello world!</div>
-      <Category></Category>
+    <div className="App">
+      <Router />
     </div>
   );
 }

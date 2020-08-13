@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import CategoryButton from './CategoryButton';
-import CategoryHeader from './CategoryHeader';
+import CategoryHeader from './CategoryButtonsHeader';
 
 const categoryTitleArr: Array<string> = [
     "bread", "egg", "hot-dog", "icecream", "meal-kit",
