@@ -1,22 +1,11 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { KEY_NAME } from "../../../constants/message";
 
-type Name = {
-    [key: string]: string;
+
+type KeyName = {
+    [key: string]: { [name: string]: string };
 }
-
-const name: Name = {
-    "bread": "빵 시리얼 잼",
-    "egg": "정육 수산 계란",
-    "hot-dog": "분식 야식",
-    "icecream": "아이스크림",
-    "meal-kit": "밀키트",
-    "milk": "우유 유제품",
-    "salad": "과일 샐러드",
-    "snacks": "과자 초콜릿",
-    "soap": "헤어 바디 세안",
-    "three-lines": "더보기"
-};
 
 const smallOut = keyframes`
   0% {
@@ -61,8 +50,8 @@ const ButtonTitle = styled.p`
     font-size:0.7em;
 `;
 
-function CategoryButton({ type }: { type: string }): JSX.Element {
-    const imagePath = `/asset/icon/${type}.svg`;
+function CategoryButton({ keyName }: { keyName: string }): JSX.Element {
+    const imagePath = `/asset/icon/${keyName}.svg`;
 
     return (
         <ButtonWrapper>
@@ -72,7 +61,7 @@ function CategoryButton({ type }: { type: string }): JSX.Element {
                 </ButtonImgWrapper>
             </div>
             <ButtonTitle>
-                {name[type]}
+                {KEY_NAME[keyName].name}
             </ButtonTitle>
         </ButtonWrapper >
     );
