@@ -9,6 +9,8 @@ type route = {
   component: () => JSX.Element;
 };
 
+const NotFound = () => <div>Not found</div>;
+
 const Routes: Array<route> = [
   {
     path: ROUTES.HOME.path,
@@ -42,7 +44,7 @@ const RouteIf = ({ component: Component, ...rest }: route) => {
         if (token) {
           return <Component />;
         } else {
-          return <Redirect to="/" />;
+          return <Redirect to="/login" />;
         }
       }}
     />
