@@ -1,8 +1,8 @@
-import React, { UIEvent } from "react";
-import Flicking from "@egjs/react-flicking";
-import styled from "styled-components";
+import React, { UIEvent } from 'react';
+import Flicking from '@egjs/react-flicking';
+import styled from 'styled-components';
 
-import Section from "./Section";
+import Section from './Section';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export default function Menus(props: Props): JSX.Element {
-  console.log(props.menus);
+  // console.log(props.menus);
 
   return (
     <Wrapper
@@ -29,7 +29,7 @@ export default function Menus(props: Props): JSX.Element {
         const { scrollTop } = e.target as HTMLDivElement;
 
         if (props.store.flicking) {
-          console.log(scrollTop, Math.floor(scrollTop / 318));
+          // console.log(scrollTop, Math.floor(scrollTop / 318));
           props.store.flicking.moveTo(Math.floor(scrollTop / 318), 500);
         }
       }}
