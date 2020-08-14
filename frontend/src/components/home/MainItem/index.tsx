@@ -3,19 +3,26 @@ import styled from "styled-components";
 
 import ItemImg from './ItemImg';
 import ItemContent from './ItemContent';
+
+type Props = {
+    title: string;
+    price: string;
+    sale: string;
+    width?: string;
+    src: string;
+    fontSize: string;
+}
+
 const ItemArea = styled.div`
     margin-top:15px;
-    width: 107px;
 `;
 
-export default function MainItem(props: any): JSX.Element {
-    console.log(props);
-    const { title, price, sale, width, src } = props;
-    const style = { width: width + "px" };
+export default function MainItem({ title, price, sale, width, src, fontSize }: Props): JSX.Element {
+
     return (
-        <ItemArea style={style}>
+        <ItemArea>
             <ItemImg width={width} src={src}></ItemImg>
-            <ItemContent title={title} price={price} sale={sale}></ItemContent>
+            <ItemContent title={title} price={price} sale={sale} fontSize={fontSize}></ItemContent>
         </ItemArea >
     );
 }

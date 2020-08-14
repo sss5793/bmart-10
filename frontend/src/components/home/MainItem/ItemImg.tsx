@@ -5,9 +5,6 @@ const ItemImage = styled.div`
     position:relative;
 `;
 
-const Img = styled.img`
-    width:100%;
-`;
 
 const HeartArea = styled.div`
     display:block;
@@ -27,13 +24,19 @@ const Heart = styled.span`
     vertical-align:middle;
 `;
 
+const WIDTH_PERCENT = "100%";
+const WIDTH_VW = "100vw";
+const backgroundSize = "cover";
+
 export default function ItemImg(props: any): JSX.Element {
     const src = props.src;
-    const width = props.width || 107;
-    const style = { width: `${width}px`, height: `${width}px` }
+    const width = props.width || WIDTH_PERCENT;
+    const height = width === WIDTH_PERCENT ? WIDTH_VW : width;
+    const style = { width, height, backgroundImage: `url(${src})`, backgroundSize };
+
     return (
-        <ItemImage>
-            <Img src={src} alt="" style={style} /><HeartArea>
+        <ItemImage style={style}>
+            <HeartArea>
                 <Heart>♡</Heart>
             </HeartArea>
         </ItemImage>
