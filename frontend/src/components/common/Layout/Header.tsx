@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { COLOR, SVG } from '../../../constants/style';
-import Logo from './logo.png';
+// import Logo from '/asset/';
 
 const Layer = styled.div`
   width: 100%;
@@ -27,7 +27,7 @@ const Header = () => {
         </svg>
       </Item>
       <div>
-        <img src={Logo} width={'60px'} />
+        <img src="/asset/images/logo.png" width={'60px'} />
       </div>
       <Item></Item>
     </Layer>

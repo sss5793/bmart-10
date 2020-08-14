@@ -25,7 +25,7 @@ function Category(): JSX.Element {
             <Wrapper>
                 {
                     categoryTitleArr.map((title, idx) => {
-                        return <CategoryButton key={idx} type={title}></CategoryButton>
+                        return <CategoryButton key={idx + ""} keyName={title}></CategoryButton>
                     })
                 }
             </Wrapper>

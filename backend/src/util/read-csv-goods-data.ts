@@ -18,11 +18,9 @@ fs.createReadStream("./data/output.csv")
     const data: Goods = {
       name: row.name,
       categoryName: row.category_name,
-      createdAt: new Date(),
       cost: Number(row.cost.replace(",", "")),
       discount: Math.round(Math.random() * 10) * 5,
       amount: 1000,
-      isDeleted: false,
       imageUrl: row.image_url,
     };
 
