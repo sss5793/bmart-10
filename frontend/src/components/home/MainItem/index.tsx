@@ -8,7 +8,8 @@ const ItemArea = styled.div`
     width: 107px;
 `;
 
-export default function MainItem(props: any) {
+export default function MainItem(props: any): JSX.Element {
+    console.log(props);
     const { title, price, sale, width, src } = props;
     const style = { width: width + "px" };
     return (

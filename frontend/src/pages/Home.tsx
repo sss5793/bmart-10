@@ -2,22 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Layout from '../components/common/Layout';
 import Category from "../components/home/CategoryButtonArea";
-import MainItem from "../components/home/MainItem";
+import MainItemContainer from '../components/home/MainItemContainer';
+
 
 const data = [
-  { title: "스윗밸런스 고구마메쉬와 훈제오리 샐러드 325g", price: "7500", sale: "7%", src: "/asset/img/15863312604l0.jpg" },
-  { title: "오리엔탈 분짜를 빼당빼당 645g 2인", price: "14900", sale: "", src: "/asset/img/15863312604l0.jpg" },
-  { title: "마이셰프 월남쌈 2인 991g", price: "13900", sale: "", src: "/asset/img/15863312604l0.jpg" },
-  { title: "하림 숯불향갈비치킨 230g", price: "2990", sale: "", src: "/asset/img/15863312604l0.jpg" },
-  { title: "프렙박스 해산물 빠에야 1인 376g", price: "10500", sale: "", src: "/asset/img/15863312604l0.jpg" },
-  { title: "프레시지 블랙라벨 파히타 720g", price: "14900", sale: "", src: "/asset/img/15863312604l0.jpg" },
+  { title: "한끼 당근 1개", price: "7500", sale: "7%", src: "/asset/img/1583285919646l0.jpg" },
+  { title: "GAP 오이 2입", price: "14900", sale: "", src: "/asset/img/1531993158257l0.jpg" },
+  { title: "친환경 당근 500g", price: "13900", sale: "", src: "/asset/img/1463997072538l0.jpg" },
+  { title: "다다기오이 3입", price: "2990", sale: "", src: "/asset/img/1592985466972l0.jpg" },
+  { title: "무농약 양배추 1/2통", price: "10500", sale: "", src: "/asset/img/1573711443599l0.jpg" },
+  { title: "양배추 2종", price: "14900", sale: "", src: "/asset/img/1593066870177l0.jpg" },
 ];
-
-const Goods = styled.div`
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-`;
 
 
 const Home = () => {
@@ -25,12 +20,9 @@ const Home = () => {
     <Layout>
       메인 페이지
       <Category></Category>
-      <Goods>
-        {data.map(({ title, price, sale, src }, idx) => {
-          return <MainItem key={idx + ""} title={title} price={price} sale={sale} width="107" src={src}></MainItem>
-        })}
-      </Goods>
-    </Layout>);
+      <MainItemContainer width="107" data={data}>지금 뭐 먹지?</MainItemContainer>
+      <MainItemContainer width="107" data={data}>지금 필요한 생필품!!</MainItemContainer>
+    </Layout >);
 };
 
 export default Home;

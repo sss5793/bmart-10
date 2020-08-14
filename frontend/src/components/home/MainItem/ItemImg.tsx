@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const pp = "/asset/img/15863312604l0.jpg";
-
 const ItemImage = styled.div`
     position:relative;
 `;
@@ -29,7 +27,7 @@ const Heart = styled.span`
     vertical-align:middle;
 `;
 
-export default function ItemImg(props: any) {
+export default function ItemImg(props: any): JSX.Element {
     const src = props.src;
     const width = props.width || 107;
     const style = { width: `${width}px`, height: `${width}px` }

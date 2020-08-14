@@ -20,7 +20,7 @@ const DiscountedPrice = styled.div`
     font-weight:800;
 `;
 
-export default function ItemPrice(props: any) {
+export default function ItemPrice(props: any): JSX.Element {
     const price = parseInt(props.price);
     const sale = parseInt(props.sale) || 0;
     const dicountedPrice = price * (1 - (sale / 100));
