@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
 
-const Layer = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -12,13 +12,19 @@ const Layer = styled.div`
   justify-content: space-between;
 `;
 
+const Section = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+`;
+
 const Layout = (props: { children: any }) => {
   return (
-    <Layer>
+    <Wrapper>
       <Header />
-      {props.children}
+      <Section>{props.children}</Section>
       <Footer />
-    </Layer>
+    </Wrapper>
   );
 };
 
