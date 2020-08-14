@@ -64,7 +64,7 @@ const Login = (): JSX.Element => {
 
   const onChange = (e: any) => {
     e.persist();
-    console.log(e, user);
+    // console.log(e, user);
     setUser((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 

@@ -35,12 +35,14 @@ const Routes: Array<route> = [
 ];
 
 const RouteIf = ({ component: Component, ...rest }: route) => {
+  // console.log(rest);
   return (
     <Route
       exact
       path={rest.path}
       render={() => {
         const token = localStorage.getItem('token');
+        // console.log(token);
         if (token) {
           return <Component />;
         } else {
@@ -58,7 +60,12 @@ const Router = () => {
         <Route exact path={ROUTES.LOGIN.path} component={Login} />
         <Route exact path={ROUTES.REGISTER.path} component={Register} />
         {Routes.map((item: route) => (
-          <RouteIf key={item.path} {...item} />
+          <Route
+            exact
+            key={item.path}
+            path={item.path}
+            component={item.component}
+          />
         ))}
         <Route path="*">Not found</Route>
       </Switch>

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -37,7 +37,7 @@ export default function Header(props: Props): JSX.Element {
         if (ref) {
           const clientRect = ref?.getBoundingClientRect();
 
-          console.log(clientRect?.top, pageYOffset + clientRect?.top);
+          // console.log(clientRect?.top, pageYOffset + clientRect?.top);
         }
       }}
     >
