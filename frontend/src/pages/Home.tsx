@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Layout from '../components/common/Layout';
 import Category from "../components/home/CategoryButtonArea";
 import MainItemContainer from '../components/home/MainItemContainer';
-
+import MainItemGallery from '../components/home/MainItemGallery';
 
 const data = [
   { title: "한끼 당근 1개", price: "7500", sale: "7%", src: "/asset/img/1583285919646l0.jpg" },
@@ -19,9 +19,10 @@ const Home = () => {
   return (
     <Layout>
       메인 페이지
+      <MainItemGallery data={data.slice(2)}></MainItemGallery>
       <Category></Category>
-      <MainItemContainer width="107" data={data}>지금 뭐 먹지?</MainItemContainer>
-      <MainItemContainer width="107" data={data}>지금 필요한 생필품!!</MainItemContainer>
+      <MainItemContainer width="107px" data={data}>지금 뭐 먹지?</MainItemContainer>
+      <MainItemContainer width="107px" data={data}>지금 필요한 생필품!!</MainItemContainer>
     </Layout >);
 };
 
