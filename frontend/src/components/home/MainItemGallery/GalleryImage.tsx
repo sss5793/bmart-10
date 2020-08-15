@@ -11,7 +11,6 @@ const ImgDiv = styled.div`
     width: calc((100% - 20px) / 4);
     height:25vw;
     background-size: cover;
-
     &:hover {
         outline:3px solid red;
     }
