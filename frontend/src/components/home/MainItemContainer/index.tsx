@@ -14,34 +14,22 @@ const Goods = styled.div`
   justify-content: space-between;
 `;
 
-type Data = {
-    title: string;
-    price: string;
-    sale: string;
-    src: string;
-};
-type Props = {
-    width: string;
-    data: Array<Data>;
-    children: string;
-};
-
-const MAIN_ITEM_FONT_SIZE = "12px";
-
-export default function MainItemContainer({ width, data, children }: Props) {
-    const title = children;
-    const convertDataToMainItem = ({ title, price, sale, src }: Data, idx: number) => (
-        <MainItem
-            key={idx + ""} title={title} price={price} fontSize={MAIN_ITEM_FONT_SIZE}
-            sale={sale} width={width} src={src}></MainItem>
-    );
+export default function MainItemContainer(props: any) {
+    const title = props.children;
+    const data = props.data;
+    const width = props.width;
 
     return (
         <div>
             <Wrapper>
                 <h2>{title}</h2>
                 <Goods>
-                    {data.map(convertDataToMainItem)}
+                    {
+                        data.map((one: any, idx: number) => {
+                            const { title, price, sale, src } = one;
+                            return <MainItem key={idx + ""} title={title} price={price} sale={sale} width={width} src={src}></MainItem>;
+                        })
+                    }
                 </Goods>
             </Wrapper>
             <ChangeItemsButton>{title}</ChangeItemsButton>
