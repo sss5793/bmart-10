@@ -21,16 +21,16 @@ type Data = {
     src: string;
 };
 type Props = {
-    width: string;
+    width?: string;
     data: Array<Data>;
     children: string;
 };
 
 const MAIN_ITEM_FONT_SIZE = "12px";
 
-export default function MainItemContainer({ width, data, children }: Props) {
+export default function MainItemContainer({ width, data, children }: Props): JSX.Element {
     const title = children;
-    const convertDataToMainItem = ({ title, price, sale, src }: Data, idx: number) => (
+    const convertDataToMainItem = ({ title, price, sale, src }: Data, idx: number): JSX.Element => (
         <MainItem
             key={idx + ""} title={title} price={price} fontSize={MAIN_ITEM_FONT_SIZE}
             sale={sale} width={width} src={src}></MainItem>

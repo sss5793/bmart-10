@@ -17,8 +17,8 @@ const ImgDiv = styled.div`
     }
 `;
 
-export default function GalleryImage({ src, onClick, index }: Props) {
+export default function GalleryImage({ src, onClick, index }: Props): JSX.Element {
     const style = { backgroundImage: `url("${src}")` };
 
-    return <ImgDiv onClick={() => onClick(index)} style={style}></ImgDiv>;
+    return <ImgDiv onClick={(): void => onClick(parseInt(index))} style={style}></ImgDiv>;
 }

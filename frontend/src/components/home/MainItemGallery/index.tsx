@@ -25,14 +25,14 @@ const GalleryImages = styled.div`
 `;
 
 const MAIN_ITEM_FONT_SIZE = "17px";
+const MAIN_ITEM_WIDTH = "100%";
 
-
-export default function MainItemGallery({ data }: Props) {
+export default function MainItemGallery({ data }: Props): JSX.Element {
     const [index, setIndex] = useState(0);
     const { title, price, sale, src }: Data = data[index];
 
-    const setIdx = (idx: any) => setIndex(idx);
-    const convertDataToGalleryImage = ({ src }: { src: string }, idx: number) => (
+    const setIdx = (idx: number): void => setIndex(idx);
+    const convertDataToGalleryImage = ({ src }: { src: string }, idx: number): JSX.Element => (
         <GalleryImage key={idx + ""} index={idx + ""} onClick={setIdx} src={src}></GalleryImage>);
 
     return (
@@ -41,7 +41,7 @@ export default function MainItemGallery({ data }: Props) {
             <GalleryImages>
                 {data.map(convertDataToGalleryImage)}
             </GalleryImages>
-            <MainItem fontSize={MAIN_ITEM_FONT_SIZE} title={title} price={price} sale={sale} src={src}></MainItem>
+            <MainItem fontSize={MAIN_ITEM_FONT_SIZE} title={title} price={price} sale={sale} width={MAIN_ITEM_WIDTH} src={src}></MainItem>
         </GalleryWrapper>
     );
 }
