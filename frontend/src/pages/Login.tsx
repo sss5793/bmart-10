@@ -15,11 +15,24 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 
+const Image = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Form = styled.div`
+  margin-top: 70px;
+`;
+
 const Input = styled.input`
   width: 100%;
   height: 40px;
   margin-top: 10px;
   padding: 0 10px;
+  background: #ffffff63;
+  border: 0;
+  outline: none;
 `;
 
 const Button = styled.button`
@@ -34,6 +47,14 @@ const Button = styled.button`
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
 `;
 
+const Bottom = styled.div`
+  width: 100%;
+  margin-top: 70px;
+  text-align: center;
+  color: ${COLOR.GREEN_1};
+  font-weight: 600;
+`;
+
 const Login = (): JSX.Element => {
   const history = useHistory();
   const [user, setUser] = useState({
@@ -43,27 +64,38 @@ const Login = (): JSX.Element => {
 
   const onChange = (e: any) => {
     e.persist();
+    // console.log(e, user);
     setUser((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
   const loginActions = () => {
-    console.log(user);
     localStorage.setItem('token', 'token');
-    history.push('/home');
+    history.push('/');
+  };
+
+  const goRegister = () => {
+    history.push('/register');
   };
 
   return (
     <Wrapper>
-      <img src="/asset/images/gom.png" width={'50%'} />
-      <img src="/asset/images/logo_horizon.png" width={'50%'} />
-      <Input name="id" type="text" onChange={onChange} placeholder="아이디" />
-      <Input
-        name="password"
-        type="password"
-        onChange={onChange}
-        placeholder="패스워드"
-      />
-      <Button onClick={loginActions}>로그인</Button>
+      <Image>
+        <img src="/asset/images/gom.png" width={'50%'} />
+        <img src="/asset/images/logo_horizon.png" width={'50%'} />
+      </Image>
+      <Form>
+        <Input name="id" type="text" onChange={onChange} placeholder="아이디" />
+        <Input
+          name="password"
+          type="password"
+          onChange={onChange}
+          placeholder="비밀번호"
+        />
+        <Button onClick={loginActions}>로그인</Button>
+      </Form>
+      <Bottom>
+        <p onClick={goRegister}>회원가입</p>
+      </Bottom>
     </Wrapper>
   );
 };
