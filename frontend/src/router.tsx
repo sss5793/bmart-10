@@ -9,6 +9,8 @@ type route = {
   component: () => JSX.Element;
 };
 
+const NotFound = () => <div>Not found</div>;
+
 const Routes: Array<route> = [
   {
     path: ROUTES.HOME.path,
@@ -33,16 +35,18 @@ const Routes: Array<route> = [
 ];
 
 const RouteIf = ({ component: Component, ...rest }: route) => {
+  // console.log(rest);
   return (
     <Route
       exact
       path={rest.path}
       render={() => {
         const token = localStorage.getItem('token');
+        // console.log(token);
         if (token) {
           return <Component />;
         } else {
-          return <Redirect to="/" />;
+          return <Redirect to="/login" />;
         }
       }}
     />
@@ -56,7 +60,12 @@ const Router = () => {
         <Route exact path={ROUTES.LOGIN.path} component={Login} />
         <Route exact path={ROUTES.REGISTER.path} component={Register} />
         {Routes.map((item: route) => (
-          <RouteIf key={item.path} {...item} />
+          <Route
+            exact
+            key={item.path}
+            path={item.path}
+            component={item.component}
+          />
         ))}
         <Route path="*">Not found</Route>
       </Switch>
