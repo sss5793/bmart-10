@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ItemDispatch, ItemContextType } from "./ItemContext";
 
-type Props = {
+type ValueType = {
     fontSize?: string;
     price?: string;
     sale?: string;
-};
+    saleValue?: number;
+    discountedPrice?: number;
+}
+
+const DEFAULT_PRICE = '0';
+const DEFAULT_SALE = "0%";
+
+const FONT_SIZE = "10px";
+const MARGIN_TOP = '-5px';
 
 const Sale = styled.span`
     font-weight:800;
@@ -23,9 +32,6 @@ const DiscountedPrice = styled.div`
     font-weight:800;
 `;
 
-const FONT_SIZE = "10px";
-const MARGIN_TOP = '-5px';
-
 const getSaleValue = (sale: string): number => {
     const saleValue = parseInt(sale);
     return (Number.isNaN(saleValue)) ? 0 : saleValue;
@@ -36,13 +42,19 @@ const getDiscountPrice = (price: string, saleValue: number): number => {
     return parseInt(result + "");    // 소수값 제거
 };
 
-export default function ItemPrice({ fontSize = FONT_SIZE, price = '0', sale = '0%' }: Props): JSX.Element {
-    const saleValue = getSaleValue(sale);
+const getValues = ({ fontSize = FONT_SIZE, price = DEFAULT_PRICE, sale = DEFAULT_SALE }: ItemContextType): ValueType => {
+    const saleValue: number = getSaleValue(sale);
     const discountedPrice = getDiscountPrice(price, saleValue);
+
+    return ({ fontSize, price, sale, saleValue, discountedPrice });
+}
+
+export default function ItemPrice(): JSX.Element {
+    const { fontSize, price, sale, saleValue, discountedPrice }: ValueType = getValues(useContext(ItemDispatch));
 
     return (
         <div>
-            {saleValue > 0 &&
+            {saleValue! > 0 &&
                 (<div style={{ marginTop: MARGIN_TOP }}>
                     <Sale style={{ fontSize }}>{sale}</Sale>
                     <Price style={{ fontSize }}>{price}원</Price>

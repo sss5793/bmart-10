@@ -1,28 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import ItemImg from './ItemImg';
 import ItemContent from './ItemContent';
-
-type Props = {
-    title?: string;
-    price?: string;
-    sale?: string;
-    width?: string;
-    src?: string;
-    fontSize?: string;
-}
+import { ItemDispatch, ItemContextType } from './ItemContext';
 
 const ItemArea = styled.div`
     margin-top:15px;
 `;
 
-export default function MainItem({ title, price, sale, width, src, fontSize }: Props): JSX.Element {
-
+export default function MainItem(props: ItemContextType): JSX.Element {
     return (
-        <ItemArea>
-            <ItemImg width={width} src={src}></ItemImg>
-            <ItemContent title={title} price={price} sale={sale} fontSize={fontSize}></ItemContent>
-        </ItemArea >
+        <ItemDispatch.Provider value={props}>
+            <ItemArea>
+                <ItemImg></ItemImg>
+                <ItemContent></ItemContent>
+            </ItemArea >
+        </ItemDispatch.Provider>
     );
 }
