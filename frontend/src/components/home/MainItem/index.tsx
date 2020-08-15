@@ -5,12 +5,12 @@ import ItemImg from './ItemImg';
 import ItemContent from './ItemContent';
 
 type Props = {
-    title: string;
-    price: string;
-    sale: string;
+    title?: string;
+    price?: string;
+    sale?: string;
     width?: string;
-    src: string;
-    fontSize: string;
+    src?: string;
+    fontSize?: string;
 }
 
 const ItemArea = styled.div`

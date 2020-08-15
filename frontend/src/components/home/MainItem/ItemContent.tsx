@@ -4,10 +4,10 @@ import styled from "styled-components";
 import ItemPrice from './ItemPrice';
 
 type Props = {
-    price: string;
-    sale: string;
-    title: string;
-    fontSize: string;
+    price?: string;
+    sale?: string;
+    title?: string;
+    fontSize?: string;
 }
 
 const ItemContentWrapper = styled.div`

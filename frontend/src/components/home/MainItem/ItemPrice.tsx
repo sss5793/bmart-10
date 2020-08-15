@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 type Props = {
-    fontSize: string;
-    price: string;
-    sale: string;
+    fontSize?: string;
+    price?: string;
+    sale?: string;
 };
 
 const Sale = styled.span`
@@ -31,12 +31,12 @@ const getSaleValue = (sale: string): number => {
     return (Number.isNaN(saleValue)) ? 0 : saleValue;
 };
 
-const getDiscountPrice = (price: string, saleValue: number) => {
+const getDiscountPrice = (price: string, saleValue: number): number => {
     const result = parseInt(price) * (1 - (saleValue / 100));
     return parseInt(result + "");    // 소수값 제거
 };
 
-export default function ItemPrice({ fontSize = FONT_SIZE, price, sale }: Props): JSX.Element {
+export default function ItemPrice({ fontSize = FONT_SIZE, price = '0', sale = '0%' }: Props): JSX.Element {
     const saleValue = getSaleValue(sale);
     const discountedPrice = getDiscountPrice(price, saleValue);
 
