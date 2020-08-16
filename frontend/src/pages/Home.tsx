@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Layout from '../components/common/Layout';
 import Category from '../components/home/CategoryButtonArea';
 import MainItemContainer from '../components/home/MainItemContainer';
+import MainItemGallery from '../components/home/MainItemGallery';
 import Banner from '../components/home/Banner';
 import Recommend from '../components/home/Recommend';
 
@@ -63,12 +64,13 @@ const advertiseMockData = [
 export default function Home(): JSX.Element {
   return (
     <Layout>
-      <Category></Category>
       <Banner advertiseData={advertiseMockData}></Banner>
-      <MainItemContainer width="107" data={data}>
+      <Category></Category>
+      <MainItemGallery data={data.slice(0, 4)}></MainItemGallery>
+      <MainItemContainer data={data}>
         지금 뭐 먹지?
       </MainItemContainer>
-      <MainItemContainer width="107" data={data}>
+      <MainItemContainer data={data}>
         지금 필요한 생필품!!
       </MainItemContainer>
       <Recommend></Recommend>

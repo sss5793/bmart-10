@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ItemDispatch, ItemContextType } from './ItemContext';
+
+type Style = {
+    width: string;
+    height: string;
+    backgroundImage: string;
+    backgroundSize: string;
+};
+
+
+const DEFAULT_WIDTH = "107px";   // 값이 들어오지 않았을대의 기본값
+const BACKGROUND_SIZE = "cover";
 
 const ItemImage = styled.div`
     position:relative;
-`;
-
-const Img = styled.img`
-    width:100%;
+    outline: 1px solid #eee;
 `;
 
 const HeartArea = styled.div`
@@ -27,13 +36,34 @@ const Heart = styled.span`
     vertical-align:middle;
 `;
 
-export default function ItemImg(props: any): JSX.Element {
-    const src = props.src;
-    const width = props.width || 107;
-    const style = { width: `${width}px`, height: `${width}px` }
+/**
+ * 이미지는 정사각형으로 보여준다. 따라서 width값과 동일한다.
+ * @param width 
+ */
+const getHeight = (width: string): string => {
+    switch (true) {
+        case width.includes('%'):
+            return `${parseInt(width)}vw`;
+        case width === undefined:
+            return DEFAULT_WIDTH;
+        default:
+            return width;
+    }
+}
+
+const getStyle = (values: ItemContextType): Style => {
+    const src = values.src;
+    const width = values.width || DEFAULT_WIDTH;
+    const height = getHeight(width);
+    return ({ width, height, backgroundImage: `url(${src})`, backgroundSize: BACKGROUND_SIZE });
+}
+
+export default function ItemImg(): JSX.Element {
+    const style = getStyle(useContext(ItemDispatch));
+
     return (
-        <ItemImage>
-            <Img src={src} alt="" style={style} /><HeartArea>
+        <ItemImage style={style}>
+            <HeartArea>
                 <Heart>♡</Heart>
             </HeartArea>
         </ItemImage>
