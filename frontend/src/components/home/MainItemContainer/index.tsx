@@ -19,6 +19,7 @@ type Data = {
     price: string;
     sale: string;
     src: string;
+    width?: string;
 };
 type Props = {
     width?: string;
@@ -28,20 +29,21 @@ type Props = {
 
 const MAIN_ITEM_FONT_SIZE = "12px";
 
-export default function MainItemContainer({ width, data, children }: Props): JSX.Element {
-    const title = children;
-    const convertDataToMainItem = ({ title, price, sale, src }: Data, idx: number): JSX.Element => (
-        <MainItem
-            key={idx + ""} title={title} price={price} fontSize={MAIN_ITEM_FONT_SIZE}
-            sale={sale} width={width} src={src}></MainItem>
-    );
+const convertDataToMainItem = ({ title, price, sale, src, width }: Data, idx: number): JSX.Element => (
+    <MainItem
+        key={idx + ""} title={title} price={price} fontSize={MAIN_ITEM_FONT_SIZE}
+        sale={sale} width={width} src={src}></MainItem>
+);
+
+export default function MainItemContainer({ width, data, children: title }: Props): JSX.Element {
 
     return (
         <div>
             <Wrapper>
                 <h2>{title}</h2>
                 <Goods>
-                    {data.map(convertDataToMainItem)}
+                    {data.map((oneData: Data, idx: number) =>
+                        convertDataToMainItem({ ...oneData, width }, idx))}
                 </Goods>
             </Wrapper>
             <ChangeItemsButton>{title}</ChangeItemsButton>
