@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import ChangeItemsButton from './ChangeItemsButton';
@@ -35,18 +35,27 @@ const convertDataToMainItem = ({ title, price, sale, src, width }: Data, idx: nu
         sale={sale} width={width} src={src}></MainItem>
 );
 
+const next = (idx: number, dataLength: number, stateFunction: any) => {
+    const nextIdx = ((idx + 1) * 6 >= dataLength) ? 0 : idx + 1;
+    stateFunction(nextIdx);
+};
+
 export default function MainItemContainer({ width, data, children: title }: Props): JSX.Element {
+    const dataLength = data.length;
+    const [idx, setIdx] = useState(0);
+    const displayedData = data.slice(idx * 6, (idx + 1) * 6);
+
 
     return (
         <div>
             <Wrapper>
                 <h2>{title}</h2>
                 <Goods>
-                    {data.map((oneData: Data, idx: number) =>
+                    {displayedData.map((oneData: Data, idx: number) =>
                         convertDataToMainItem({ ...oneData, width }, idx))}
                 </Goods>
             </Wrapper>
-            <ChangeItemsButton>{title}</ChangeItemsButton>
+            <ChangeItemsButton onClick={() => next(idx, dataLength, setIdx)} index={idx} lastIdx={dataLength / 6}>{title}</ChangeItemsButton>
         </div>
     );
 }
