@@ -51,9 +51,7 @@ const getHeight = (width: string): string => {
     }
 }
 
-const getStyle = (values: ItemContextType): Style => {
-    const src = values.src;
-    const width = values.width || DEFAULT_WIDTH;
+const getStyle = ({ src, width = DEFAULT_WIDTH }: ItemContextType): Style => {
     const height = getHeight(width);
     return ({ width, height, backgroundImage: `url(${src})`, backgroundSize: BACKGROUND_SIZE });
 }
