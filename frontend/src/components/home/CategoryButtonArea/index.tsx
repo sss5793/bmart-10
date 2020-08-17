@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import CategoryButton from "./CategoryButton";
 import CategoryHeader from "./CategoryButtonsHeader";
 
@@ -33,7 +34,9 @@ function Category(): JSX.Element {
       <Wrapper>
         {categoryTitleArr.map((title, idx) => {
           return (
-            <CategoryButton key={idx + ""} keyName={title}></CategoryButton>
+            <Link key={title + idx} to={`/category/${title}`}>
+              <CategoryButton key={idx + ""} keyName={title}></CategoryButton>
+            </Link>
           );
         })}
       </Wrapper>

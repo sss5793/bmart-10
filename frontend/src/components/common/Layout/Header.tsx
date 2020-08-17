@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { COLOR, SVG } from '../../../constants/style';
+import { COLOR, SVG } from "../../../constants/style";
 // import Logo from '/asset/';
+import { KEY_NAME } from "../../../constants/message";
 
 const Layer = styled.div`
   width: 100%;
@@ -18,7 +19,14 @@ const Item = styled.div`
   width: 36px;
 `;
 
-const Header = () => {
+const Title = styled.h2`
+  color: #fff;
+`;
+
+const Header = (props: any) => {
+  const categoryKey = props.categoryKey;
+  const categoryName = KEY_NAME[categoryKey]?.name;
+
   return (
     <Layer>
       <Item>
@@ -27,7 +35,11 @@ const Header = () => {
         </svg>
       </Item>
       <div>
-        <img src="/asset/images/logo.png" width={'60px'} />
+        {categoryName ? (
+          <Title>{categoryName}</Title>
+        ) : (
+          <img src="/asset/images/logo.png" width={"60px"} />
+        )}
       </div>
       <Item></Item>
     </Layer>

@@ -1,12 +1,18 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
-import { Home, Category, Search, Menu, Cart, Login, Register } from './pages';
-import * as ROUTES from './constants/routes';
+import { Home, Category, Search, Menu, Cart, Login, Register } from "./pages";
+import * as ROUTES from "./constants/routes";
+
+type routeParams = {
+  history?: any;
+  location?: any;
+  path?: any;
+};
 
 type route = {
   path: string;
-  component: () => JSX.Element;
+  component: (props: routeParams) => JSX.Element;
 };
 
 const NotFound = () => <div>Not found</div>;
@@ -41,7 +47,7 @@ const RouteIf = ({ component: Component, ...rest }: route) => {
       exact
       path={rest.path}
       render={() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         // console.log(token);
         if (token) {
           return <Component />;
@@ -58,6 +64,16 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path={ROUTES.LOGIN.path} component={Login} />
+        <Route
+          exact
+          path={`${ROUTES.CATEGORY.path}/:mainCategory/:subCategory`}
+          component={Category}
+        />
+        <Route
+          exact
+          path={`${ROUTES.CATEGORY.path}/:mainCategory`}
+          component={Category}
+        />
         <Route exact path={ROUTES.REGISTER.path} component={Register} />
         {Routes.map((item: route) => (
           <Route
