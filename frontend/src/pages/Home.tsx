@@ -6,6 +6,7 @@ import MainItemContainer from '../components/home/MainItemContainer';
 import MainItemGallery from '../components/home/MainItemGallery';
 import Banner from '../components/home/Banner';
 import Recommend from '../components/home/Recommend';
+import itemData from '../ItemData.json';
 
 const data = [
   {
@@ -67,10 +68,10 @@ export default function Home(): JSX.Element {
       <Banner advertiseData={advertiseMockData}></Banner>
       <Category></Category>
       <MainItemGallery data={data.slice(0, 4)}></MainItemGallery>
-      <MainItemContainer data={data}>
+      <MainItemContainer data={itemData.slice(0, 30)}>
         지금 뭐 먹지?
       </MainItemContainer>
-      <MainItemContainer data={data}>
+      <MainItemContainer data={itemData.slice(30, 60)}>
         지금 필요한 생필품!!
       </MainItemContainer>
       <Recommend></Recommend>

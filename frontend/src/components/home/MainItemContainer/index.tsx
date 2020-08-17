@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import ChangeItemsButton from './ChangeItemsButton';
@@ -19,6 +19,7 @@ type Data = {
     price: string;
     sale: string;
     src: string;
+    width?: string;
 };
 type Props = {
     width?: string;
@@ -28,23 +29,33 @@ type Props = {
 
 const MAIN_ITEM_FONT_SIZE = "12px";
 
-export default function MainItemContainer({ width, data, children }: Props): JSX.Element {
-    const title = children;
-    const convertDataToMainItem = ({ title, price, sale, src }: Data, idx: number): JSX.Element => (
-        <MainItem
-            key={idx + ""} title={title} price={price} fontSize={MAIN_ITEM_FONT_SIZE}
-            sale={sale} width={width} src={src}></MainItem>
-    );
+const convertDataToMainItem = ({ title, price, sale, src, width }: Data, idx: number): JSX.Element => (
+    <MainItem
+        key={idx + ""} title={title} price={price} fontSize={MAIN_ITEM_FONT_SIZE}
+        sale={sale} width={width} src={src}></MainItem>
+);
+
+const next = (idx: number, dataLength: number, stateFunction: any) => {
+    const nextIdx = ((idx + 1) * 6 >= dataLength) ? 0 : idx + 1;
+    stateFunction(nextIdx);
+};
+
+export default function MainItemContainer({ width, data, children: title }: Props): JSX.Element {
+    const dataLength = data.length;
+    const [idx, setIdx] = useState(0);
+    const displayedData = data.slice(idx * 6, (idx + 1) * 6);
+
 
     return (
         <div>
             <Wrapper>
                 <h2>{title}</h2>
                 <Goods>
-                    {data.map(convertDataToMainItem)}
+                    {displayedData.map((oneData: Data, idx: number) =>
+                        convertDataToMainItem({ ...oneData, width }, idx))}
                 </Goods>
             </Wrapper>
-            <ChangeItemsButton>{title}</ChangeItemsButton>
+            <ChangeItemsButton onClick={() => next(idx, dataLength, setIdx)} index={idx} lastIdx={dataLength / 6}>{title}</ChangeItemsButton>
         </div>
     );
 }

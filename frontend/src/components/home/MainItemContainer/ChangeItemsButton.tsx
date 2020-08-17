@@ -7,13 +7,13 @@ const Button = styled.button`
     border: none;
 `;
 
-export default function ChangeItemsButton(props: any): JSX.Element {
-    const title = props.children;
+export default function ChangeItemsButton({ onClick, index, children: title, lastIdx }: any): JSX.Element {
+
     return (
-        <Button>
+        <Button onClick={onClick}>
             <i className="fa fa-refresh fa-spin"></i>
             <span>&nbsp;{title}</span>
-            <span>&nbsp;다른 상품 보기</span>
+            <span>&nbsp;다른 상품 보기 {index + 1}/{lastIdx}</span>
         </Button>
     );
 }
