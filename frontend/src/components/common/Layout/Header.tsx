@@ -23,9 +23,13 @@ const Title = styled.h2`
   color: #fff;
 `;
 
-const Header = (props: any) => {
-  const categoryKey = props.categoryKey;
-  const categoryName = KEY_NAME[categoryKey]?.name;
+const getCategoryName = (mainCategory: string, subCategory: string): string => {
+  if (subCategory) return KEY_NAME[mainCategory].subCategory[subCategory].name;
+  return KEY_NAME[mainCategory]?.name;
+};
+
+const Header = ({ mainCategory, subCategory }: any) => {
+  const categoryName = getCategoryName(mainCategory, subCategory);
 
   return (
     <Layer>

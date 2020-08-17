@@ -19,9 +19,10 @@ const Section = styled.div`
 `;
 
 const Layout = (props: any) => {
+  const { mainCategory, subCategory } = props;
   return (
     <Wrapper>
-      <Header categoryKey={props.categoryKey} />
+      <Header mainCategory={mainCategory} subCategory={subCategory} />
       <Section>{props.children}</Section>
       <Footer />
     </Wrapper>
