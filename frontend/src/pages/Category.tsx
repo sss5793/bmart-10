@@ -5,6 +5,7 @@ import CategoryMenu from "../components/common/CategoryMenu";
 import Banner from "../components/home/Banner";
 import { getAdsData, getItems } from "../mock";
 import { KEY_NAME } from "../constants/message";
+import ItemList from "../components/common/ItemList";
 
 const categoryData = [
   "bread",
@@ -64,6 +65,7 @@ const Category = ({ match }: any): JSX.Element => {
           })}
         </HorizontalSlider>
       )}
+      <ItemList data={getItems(40)}></ItemList>
     </Layout>
   );
 };

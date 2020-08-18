@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ItemDispatch, ItemContextType } from "./ItemContext";
 
 type Style = {
-  width: string;
+  width?: string;
   height: string;
   backgroundImage: string;
   backgroundSize: string;
@@ -53,7 +53,6 @@ const getHeight = (width: string): string => {
 const getStyle = ({ src, width = DEFAULT_WIDTH }: ItemContextType): Style => {
   const height = getHeight(width);
   return {
-    width,
     height,
     backgroundImage: `url(${src})`,
     backgroundSize: BACKGROUND_SIZE,
