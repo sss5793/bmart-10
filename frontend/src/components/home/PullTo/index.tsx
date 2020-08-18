@@ -26,7 +26,7 @@ export default function PullTop(props: Props): JSX.Element {
   props.observable.callbacks.push(setHeight);
 
   return (
-    <Wrapper style={{ height: height }}>
+    <Wrapper style={{ height: Math.round(height) }}>
       <Text>땡겨도 아무것도 없어요</Text>
     </Wrapper>
   );
