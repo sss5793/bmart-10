@@ -1,8 +1,8 @@
-import React, { Children } from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Header from './Header';
-import Footer from './Footer';
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  overscroll-behavior-y: none;
 `;
 
 const Section = styled.div`
@@ -18,7 +20,11 @@ const Section = styled.div`
   overflow-y: auto;
 `;
 
-const Layout = (props: { children: any }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const Layout = (props: Props) => {
   return (
     <Wrapper>
       <Header />
