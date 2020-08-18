@@ -9,12 +9,16 @@ const ItemContentWrapper = styled.div`
   margin-top: ${MARGIN_TOP};
 `;
 
+const ItemTitle = styled.div`
+  white-space: break-spaces;
+`;
+
 export default function ItemContent(): JSX.Element {
   const { fontSize, title }: ItemContextType = useContext(ItemDispatch);
 
   return (
     <ItemContentWrapper>
-      <div style={{ fontSize }}>{title}</div>
+      <ItemTitle style={{ fontSize }}>{title}</ItemTitle>
       <ItemPrice></ItemPrice>
     </ItemContentWrapper>
   );
