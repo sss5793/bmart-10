@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import Header from "./Header";
@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  overscroll-behavior-y: none;
 `;
 
 const Section = styled.div`
@@ -18,12 +20,21 @@ const Section = styled.div`
   overflow-y: auto;
 `;
 
-const Layout = (props: any) => {
-  const { mainCategory, subCategory } = props;
+type Props = {
+  mainCategory?: string;
+  subCategory?: string;
+  children?: React.ReactNode;
+};
+
+const Layout = ({
+  mainCategory,
+  subCategory,
+  children,
+}: Props): JSX.Element => {
   return (
     <Wrapper>
       <Header mainCategory={mainCategory} subCategory={subCategory} />
-      <Section>{props.children}</Section>
+      <Section>{children}</Section>
       <Footer />
     </Wrapper>
   );

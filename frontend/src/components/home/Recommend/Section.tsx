@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import MainItem from "../MainItem";
@@ -19,9 +19,7 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
-type Props = {};
-
-export default function Menus(props: Props): JSX.Element {
+export default function Menus(): JSX.Element {
   return (
     <Wrapper>
       <Row>

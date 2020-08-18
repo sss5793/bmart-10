@@ -44,7 +44,11 @@ const convertDataToMainItem = (
   ></MainItem>
 );
 
-const next = (idx: number, dataLength: number, stateFunction: any) => {
+const next = (
+  idx: number,
+  dataLength: number,
+  stateFunction: React.Dispatch<React.SetStateAction<number>>
+): void => {
   const nextIdx = (idx + 1) * 6 >= dataLength ? 0 : idx + 1;
   stateFunction(nextIdx);
 };
@@ -69,7 +73,7 @@ export default function MainItemContainer({
         </Goods>
       </Wrapper>
       <ChangeItemsButton
-        onClick={() => next(idx, dataLength, setIdx)}
+        onClick={(): void => next(idx, dataLength, setIdx)}
         index={idx}
         lastIdx={dataLength / 6}
       >

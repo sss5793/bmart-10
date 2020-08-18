@@ -7,12 +7,19 @@ const Button = styled.button`
   border: none;
 `;
 
+type Props = {
+  onClick: () => void;
+  index: number;
+  children: string;
+  lastIdx: number;
+};
+
 export default function ChangeItemsButton({
   onClick,
   index,
   children: title,
   lastIdx,
-}: any): JSX.Element {
+}: Props): JSX.Element {
   return (
     <Button onClick={onClick}>
       <i className="fa fa-refresh fa-spin"></i>

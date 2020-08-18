@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Flicking from "@egjs/react-flicking";
 import { FlickingEvent } from "@egjs/flicking";
 import styled from "styled-components";

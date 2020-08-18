@@ -58,13 +58,13 @@ export default function ItemPrice(): JSX.Element {
     fontSize,
     price,
     sale,
-    saleValue,
+    saleValue = 0,
     discountedPrice,
   }: ValueType = getValues(useContext(ItemDispatch));
 
   return (
     <div>
-      {saleValue! > 0 && (
+      {saleValue > 0 && (
         <div style={{ marginTop: MARGIN_TOP }}>
           <Sale style={{ fontSize }}>{sale}</Sale>
           <Price style={{ fontSize }}>{price}원</Price>
