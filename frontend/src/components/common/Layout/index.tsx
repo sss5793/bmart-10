@@ -24,7 +24,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const Layout = (props: Props) => {
+const Layout = (props: Props): JSX.Element => {
   return (
     <Wrapper>
       <Header />
