@@ -1,13 +1,15 @@
 import React from "react";
-import Layout from "../components/common/Layout";
+import { Layout, HorizontalSlider } from '../components/common';
 import Category from "../components/home/CategoryButtonArea";
 import MainItemContainer from "../components/home/MainItemContainer";
 import MainItemGallery from "../components/home/MainItemGallery";
 import Banner from "../components/home/Banner";
 import Recommend from "../components/home/Recommend";
-import itemData from "../ItemData.json";
 
+import MainItem from "../components/home/MainItem";
 import PullTo from "../components/home/PullTo";
+
+import itemData from "../ItemData.json";
 
 const data = [
   {
@@ -63,6 +65,15 @@ const advertiseMockData = [
   },
 ];
 
+
+type Data = {
+  title: string;
+  price: string;
+  sale: string;
+  src: string;
+  width?: string;
+};
+
 export default function Home(): JSX.Element {
   let isScroll = true;
   let scrollStart = 0;
@@ -112,14 +123,32 @@ export default function Home(): JSX.Element {
         <PullTo observable={observable} />
         <Banner advertiseData={advertiseMockData}></Banner>
         <Category></Category>
-        <MainItemGallery data={data.slice(0, 4)}></MainItemGallery>
+        <HorizontalSlider title={'고객님을 위해 준비한 상품'}>
+          {
+            data.map((item: Data, idx: number) =>
+                <MainItem key={idx + ""} {...item}/>)
+          }
+        </HorizontalSlider>
+        <MainItemGallery data={data.slice(0, 4)}/>
         <MainItemContainer data={itemData.slice(0, 30)}>
           지금 뭐 먹지?
         </MainItemContainer>
+        <HorizontalSlider title={'새로 나왔어요'} isMore onClick={() => {console.log('새로 나온거 더보기...')}}>
+          {
+            data.map((item: Data, idx: number) =>
+                <MainItem key={idx + ""} {...item}/>)
+          }
+        </HorizontalSlider>
+        <HorizontalSlider title={'요즘 잘 팔려요'} isMore onClick={() => {console.log('요즘 잘 팔리는거 더보기...')}}>
+          {
+            data.map((item: Data, idx: number) =>
+                <MainItem key={idx + ""} {...item}/>)
+          }
+        </HorizontalSlider>
         <MainItemContainer data={itemData.slice(30, 60)}>
           지금 필요한 생필품!!
         </MainItemContainer>
-        <Recommend></Recommend>
+        <Recommend />
       </div>
     </Layout>
   );
