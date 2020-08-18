@@ -1,26 +1,64 @@
 import React from "react";
-import { Layout } from "../components/common";
+import { Layout, HorizontalSlider } from "../components/common";
+import MainItem from "../components/home/MainItem";
 import CategoryMenu from "../components/common/CategoryMenu";
+import Banner from "../components/home/Banner";
+import { getAdsData, getItems } from "../mock";
+import { KEY_NAME } from "../constants/message";
 
+const categoryData = [
+  "bread",
+  "egg",
+  "hot-dog",
+  "icecream",
+  "meal-kit",
+  "milk",
+  "salad",
+  "snacks",
+  "soap",
+];
+
+type Data = {
+  title: string;
+  price: string;
+  sale: string;
+  src: string;
+  width?: string;
+};
+// bread: {
+//   name: "빵 시리얼 잼",
+//   subCategory: {
+//     bread: { name: "빵" },
+//     cereal: { name: "시리얼" },
+//     riceCake: { name: "떡" },
+//     jam: { name: "잼 스프레드" },
+//   },
+// },
 const Category = ({ match }: any): JSX.Element => {
   const mainCategory = match.params.mainCategory;
   const subCategory = match.params.subCategory;
+  const subCategoryData = Object.keys(KEY_NAME[mainCategory].subCategory).map(
+    (o) => o
+  );
+
+  console.log(subCategoryData);
+  const data = getItems(6);
 
   return (
     <Layout mainCategory={mainCategory} subCategory={subCategory}>
-      <CategoryMenu
-        categoryData={[
-          "bread",
-          "egg",
-          "hot-dog",
-          "icecream",
-          "meal-kit",
-          "milk",
-          "salad",
-          "snacks",
-          "soap",
-        ]}
-      ></CategoryMenu>
+      <Banner advertiseData={getAdsData()}></Banner>
+      <CategoryMenu categoryData={subCategoryData}></CategoryMenu>
+      <HorizontalSlider
+        title={"이 상품 어때요?"}
+        isMore
+        onClick={() => {
+          console.log("새로 나온거 더보기...");
+        }}
+      >
+        {data.map((item: Data, idx: number) => {
+          return <MainItem key={idx + ""} {...item} />;
+        })}
+      </HorizontalSlider>
     </Layout>
   );
 };

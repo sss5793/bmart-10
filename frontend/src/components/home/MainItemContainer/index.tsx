@@ -17,7 +17,7 @@ const Goods = styled.div`
 type Data = {
   title: string;
   price: string;
-  sale: string;
+  sale?: string;
   src: string;
   width?: string;
 };
