@@ -28,19 +28,9 @@ const Text = styled.p`
   padding: 0;
 `;
 
-type Props = {};
-
-export default function Header(props: Props): JSX.Element {
+export default function Header(): JSX.Element {
   return (
-    <Wrapper
-      ref={(ref) => {
-        if (ref) {
-          const clientRect = ref?.getBoundingClientRect();
-
-          // console.log(clientRect?.top, pageYOffset + clientRect?.top);
-        }
-      }}
-    >
+    <Wrapper>
       <StrongText>번쩍하면 배달오는</StrongText>
       <Text>B+ 마트 대표 상품</Text>
     </Wrapper>
