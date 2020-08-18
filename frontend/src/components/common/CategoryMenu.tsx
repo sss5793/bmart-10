@@ -11,11 +11,14 @@ const Menu = styled.div`
   }
 `;
 
+const RowContainer = styled.div``;
+
 const Row = styled.div`
   display: flex;
   border-bottom: 1px solid #f6f6f6;
   text-align: center;
 `;
+const SubCategory = styled.div``;
 
 const categoryGo = (history: any, baseUrl: string, name: string) => {
   if (name === "") return;
@@ -29,13 +32,19 @@ function makeRow(
 ): JSX.Element {
   const history = useHistory();
   return (
-    <Row style={{ display: "flex" }} key={idx + ""}>
-      {menuData.map((one: any, idx: number) => (
-        <Menu key={one + idx} onClick={() => categoryGo(history, baseUrl, one)}>
-          {one}
-        </Menu>
-      ))}
-    </Row>
+    <RowContainer>
+      <Row key={idx + ""}>
+        {menuData.map((one: any, idx: number) => (
+          <Menu
+            key={one + idx}
+            onClick={() => categoryGo(history, baseUrl, one)}
+          >
+            {one}
+          </Menu>
+        ))}
+      </Row>
+      <SubCategory></SubCategory>
+    </RowContainer>
   );
 }
 

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { COLOR, SVG } from "../../../constants/style";
 // import Logo from '/asset/';
 import { KEY_NAME } from "../../../constants/message";
+import { useHistory } from "react-router-dom";
 
 const Layer = styled.div`
   width: 100%;
@@ -30,10 +31,11 @@ const getCategoryName = (mainCategory: string, subCategory: string): string => {
 
 const Header = ({ mainCategory, subCategory }: any) => {
   const categoryName = getCategoryName(mainCategory, subCategory);
+  const history = useHistory();
 
   return (
     <Layer>
-      <Item>
+      <Item onClick={() => history.goBack()}>
         <svg width={36} height="36px">
           <path fill={COLOR.WHITE} d={SVG.ARROW_BACK} />
         </svg>
