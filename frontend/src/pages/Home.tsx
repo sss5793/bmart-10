@@ -65,7 +65,6 @@ const advertiseMockData = [
   },
 ];
 
-
 type Data = {
   title: string;
   price: string;
