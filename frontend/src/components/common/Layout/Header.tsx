@@ -18,7 +18,7 @@ const Item = styled.div`
   width: 36px;
 `;
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <Layer>
       <Item>

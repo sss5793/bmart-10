@@ -39,8 +39,6 @@ const Item = styled.div`
   justify-content: center;
 `;
 
-const Svgs: any = SVG;
-
 const navList = [
   {
     path: ROUTES.HOME.path,

@@ -1,12 +1,12 @@
 import React from "react";
-import styled from 'styled-components';
-import {COLOR} from "../../../constants/style";
+import styled from "styled-components";
+import { COLOR } from "../../../constants/style";
 
 type Props = {
   title?: string;
   isMore?: boolean;
   onClick?: () => void;
-  children: any;
+  children: JSX.Element[];
 };
 
 const Wrapper = styled.div`
@@ -23,48 +23,50 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.p`
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: bold;
 `;
 
 const More = styled.p`
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: bold;
   color: ${COLOR.GREEN_1};
 `;
 
 const ItemWrapper = styled.div`
   overflow-x: auto;
-  white-space:nowrap;
-  
+  white-space: nowrap;
+
   > div {
     margin: 0;
     margin-right: 10px;
     display: inline-table;
 
-    &:first-child{
-      margin-left : 15px;
+    &:first-child {
+      margin-left: 15px;
     }
 
-    &:last-child{
-      margin-right : 15px;
+    &:last-child {
+      margin-right: 15px;
     }
   }
 `;
 
-const Horizontal = ({title = '이미지 슬라이더 제목', isMore = false, onClick, children}: Props) => {
-  return(
+const Horizontal = ({
+  title = "이미지 슬라이더 제목",
+  isMore = false,
+  onClick,
+  children,
+}: Props): JSX.Element => {
+  return (
     <Wrapper>
       <TitleWrapper>
         <Title>{title}</Title>
         {isMore && <More onClick={onClick}>더보기 &gt; </More>}
       </TitleWrapper>
-      <ItemWrapper>
-        {children}
-      </ItemWrapper>
+      <ItemWrapper>{children}</ItemWrapper>
     </Wrapper>
-  )
-
+  );
 };
 
 export default Horizontal;
