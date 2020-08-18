@@ -40,25 +40,30 @@ const Category = ({ match }: any): JSX.Element => {
   const subCategoryData = Object.keys(KEY_NAME[mainCategory].subCategory).map(
     (o) => o
   );
-
-  console.log(subCategoryData);
   const data = getItems(6);
 
   return (
     <Layout mainCategory={mainCategory} subCategory={subCategory}>
-      <Banner advertiseData={getAdsData()}></Banner>
-      <CategoryMenu categoryData={subCategoryData}></CategoryMenu>
-      <HorizontalSlider
-        title={"이 상품 어때요?"}
-        isMore
-        onClick={() => {
-          console.log("새로 나온거 더보기...");
-        }}
-      >
-        {data.map((item: Data, idx: number) => {
-          return <MainItem key={idx + ""} {...item} />;
-        })}
-      </HorizontalSlider>
+      {!subCategory && <Banner advertiseData={getAdsData()}></Banner>}
+      {!subCategory && (
+        <CategoryMenu
+          baseUrl={`/category${"/" + mainCategory}`}
+          categoryData={subCategoryData}
+        ></CategoryMenu>
+      )}
+      {!subCategory && (
+        <HorizontalSlider
+          title={"이 상품 어때요?"}
+          isMore
+          onClick={() => {
+            console.log("새로 나온거 더보기...");
+          }}
+        >
+          {data.map((item: Data, idx: number) => {
+            return <MainItem key={idx + ""} {...item} />;
+          })}
+        </HorizontalSlider>
+      )}
     </Layout>
   );
 };

@@ -7,27 +7,31 @@ const Menu = styled.div`
   width: 50%;
   line-height: 2em;
   &:not(:last-child) {
-    border-right: 1px solid black;
+    border-right: 1px solid #f6f6f6;
   }
 `;
 
 const Row = styled.div`
   display: flex;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #f6f6f6;
   text-align: center;
 `;
 
-const categoryGo = (history: any, name: string) => {
+const categoryGo = (history: any, baseUrl: string, name: string) => {
   if (name === "") return;
-  history.push(`/category/${name}`);
+  history.push(`${baseUrl}/${name}`);
 };
 
-function makeRow(menuData: Array<string>, idx: any): JSX.Element {
+function makeRow(
+  menuData: Array<string>,
+  baseUrl: string,
+  idx: any
+): JSX.Element {
   const history = useHistory();
   return (
     <Row style={{ display: "flex" }} key={idx + ""}>
       {menuData.map((one: any, idx: number) => (
-        <Menu key={one + idx} onClick={() => categoryGo(history, one)}>
+        <Menu key={one + idx} onClick={() => categoryGo(history, baseUrl, one)}>
           {one}
         </Menu>
       ))}
@@ -50,9 +54,12 @@ function splitArr(arr: Array<any>, colLength: number): Array<Array<any>> {
 }
 
 export default function CategoryMenu({
+  baseUrl,
   categoryData,
   col = 2,
 }: any): JSX.Element {
   const arr = splitArr(categoryData, col);
-  return <div>{arr.map(makeRow)}</div>;
+  return (
+    <div>{arr.map((one: any, idx: number) => makeRow(one, baseUrl, idx))}</div>
+  );
 }
