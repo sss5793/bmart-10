@@ -1,15 +1,13 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Home, Category, Search, Menu, Cart, Login, Register } from './pages';
-import * as ROUTES from './constants/routes';
+import { Home, Category, Search, Menu, Cart, Login, Register } from "./pages";
+import * as ROUTES from "./constants/routes";
 
 type route = {
   path: string;
   component: () => JSX.Element;
 };
-
-const NotFound = () => <div>Not found</div>;
 
 const Routes: Array<route> = [
   {
@@ -34,26 +32,7 @@ const Routes: Array<route> = [
   },
 ];
 
-const RouteIf = ({ component: Component, ...rest }: route) => {
-  // console.log(rest);
-  return (
-    <Route
-      exact
-      path={rest.path}
-      render={() => {
-        const token = localStorage.getItem('token');
-        // console.log(token);
-        if (token) {
-          return <Component />;
-        } else {
-          return <Redirect to="/login" />;
-        }
-      }}
-    />
-  );
-};
-
-const Router = () => {
+const Router = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Switch>

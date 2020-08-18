@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
-import { COLOR } from '../constants/style';
+import { COLOR } from "../constants/style";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -58,36 +58,37 @@ const Bottom = styled.div`
 const Login = (): JSX.Element => {
   const history = useHistory();
   const [user, setUser] = useState({
-    id: '',
-    password: '',
+    id: "",
+    password: "",
   });
 
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.persist();
     // console.log(e, user);
     setUser((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
-  const loginActions = () => {
-    localStorage.setItem('token', 'token');
-    history.push('/');
+  const loginActions = (): void => {
+    localStorage.setItem("token", "token");
+    history.push("/");
   };
 
-  const goRegister = () => {
-    history.push('/register');
+  const goRegister = (): void => {
+    history.push("/register");
   };
 
   return (
     <Wrapper>
       <Image>
-        <img src="/asset/images/gom.png" width={'50%'} />
-        <img src="/asset/images/logo_horizon.png" width={'50%'} />
+        <img src="/asset/images/gom.png" width={"50%"} />
+        <img src="/asset/images/logo_horizon.png" width={"50%"} />
       </Image>
       <Form>
         <Input name="id" type="text" onChange={onChange} placeholder="아이디" />
         <Input
           name="password"
           type="password"
+          value={user.id}
           onChange={onChange}
           placeholder="비밀번호"
         />
