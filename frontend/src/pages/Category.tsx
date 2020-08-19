@@ -22,10 +22,10 @@ type CategoryType = {
 };
 
 const Category = ({
-  match,
+  match: {
+    params: { mainCategory = "", subCategory },
+  },
 }: RouteComponentProps<CategoryType>): JSX.Element => {
-  const mainCategory = match.params.mainCategory || "";
-  const subCategory = match.params.subCategory;
   const subCategoryData = Object.keys(KEY_NAME[mainCategory].subCategory).map(
     (o) => o
   );
