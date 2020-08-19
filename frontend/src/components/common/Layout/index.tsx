@@ -6,7 +6,6 @@ import Footer from "./Footer";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -16,8 +15,7 @@ const Wrapper = styled.div`
 
 const Section = styled.div`
   width: 100%;
-  height: 100%;
-  overflow-y: auto;
+  margin: 80px 0;
 `;
 
 type Props = {

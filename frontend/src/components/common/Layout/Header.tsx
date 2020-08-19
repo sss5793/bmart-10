@@ -1,10 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { COLOR, SVG } from '../../../constants/style';
+import { COLOR, SVG } from "../../../constants/style";
 // import Logo from '/asset/';
 
 const Layer = styled.div`
+  z-index: 3000;
+  position: fixed;
+  top: 0;
+
   width: 100%;
   height: 80px;
   background-color: ${COLOR.GREEN_1};
@@ -27,7 +31,7 @@ const Header = (): JSX.Element => {
         </svg>
       </Item>
       <div>
-        <img src="/asset/images/logo.png" width={'60px'} />
+        <img src="/asset/images/logo.png" width={"60px"} />
       </div>
       <Item></Item>
     </Layer>
