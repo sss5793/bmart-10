@@ -101,7 +101,7 @@ export default function Home(): JSX.Element {
             <MainItem key={idx + ""} {...item} />
           ))}
         </HorizontalSlider>
-        <MainItemContainer data={itemData.slice(30, 60)}>
+        <MainItemContainer data={itemData}>
           지금 필요한 생필품!!
         </MainItemContainer>
         <Recommend />
