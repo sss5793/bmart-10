@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { COLOR, SVG } from "../../../constants/style";
+import { HEADER } from "../../../constants/layout";
 // import Logo from '/asset/';
 import { KEY_NAME } from "../../../constants/message";
 import { useHistory } from "react-router-dom";
@@ -12,8 +13,12 @@ type CategoryType = {
 };
 
 const Layer = styled.div`
+  z-index: 3000;
+  position: fixed;
+  top: 0;
+
   width: 100%;
-  height: 80px;
+  height: ${HEADER.SIZE}px;
   background-color: ${COLOR.GREEN_1};
   display: flex;
   justify-content: space-between;

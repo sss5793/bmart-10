@@ -1,15 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-import Svg from '../Svg';
+import Svg from "../Svg";
 
-import { COLOR, SVG } from '../../../constants/style';
-import * as ROUTES from '../../../constants/routes';
+import { COLOR, SVG } from "../../../constants/style";
+import { FOOTER } from "../../../constants/layout";
+
+import * as ROUTES from "../../../constants/routes";
 
 const Wrap = styled.div`
+  position: fixed;
+  bottom: 0;
+  z-index: 2000;
+
   width: 100%;
-  height: 80px;
+  height: ${FOOTER.SIZE}px;
   background-color: ${COLOR.WHITE};
   display: flex;
   justify-content: space-between;
