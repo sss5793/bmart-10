@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { Layout, HorizontalSlider } from "../components/common";
 import MainItem from "../components/home/MainItem";
 import CategoryMenu from "../components/common/CategoryMenu";
-import Banner from "../components/home/Banner";
+import Banner from "../components/common/Banner";
 import { getAdsData, getItems } from "../mock";
 import { KEY_NAME } from "../constants/message";
 import ItemList from "../components/common/ItemList";
