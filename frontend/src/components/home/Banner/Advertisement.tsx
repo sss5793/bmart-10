@@ -1,19 +1,15 @@
-import React from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.div<{ imageURL: string }>`
+type Props = {
+  imageURL: string;
+  size?: number;
+};
+
+export default styled.div<Props>`
   width: 100%;
-  height: 200px;
+  height: ${(props): string => (props.size ? `${props.size}` : "200")}px;
 
   background-image: url(${(props): string => props.imageURL});
   background-repeat: no-repeat;
   background-size: cover;
 `;
-
-type Props = {
-  imageURL: string;
-};
-
-export default function Advertisement(props: Props): JSX.Element {
-  return <Wrapper imageURL={props.imageURL}></Wrapper>;
-}
