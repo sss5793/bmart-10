@@ -46,13 +46,42 @@ const CheckIcon = ({ show }: { show: boolean }): JSX.Element => (
   ></i>
 );
 
-const sortTitle = [
-  "기본 정렬순",
-  "인기 상품순",
-  "금액 높은순",
-  "금액 낮은순",
-  "신규 상품순",
-  "할인율 순",
+type SortType = {
+  title: string;
+  sortLogic: (a: ItemType, b: ItemType) => number;
+};
+
+const sortTypeArr: Array<SortType> = [
+  {
+    title: "기본 정렬순",
+    sortLogic: (a: ItemType, b: ItemType): number =>
+      a.title > b.title ? 1 : -1,
+  },
+  {
+    title: "인기 상품순",
+    sortLogic: (a: ItemType, b: ItemType): number =>
+      a.title > b.title ? 1 : -1,
+  },
+  {
+    title: "금액 높은순",
+    sortLogic: (a: ItemType, b: ItemType): number =>
+      parseInt(b.price) - parseInt(a.price),
+  },
+  {
+    title: "금액 낮은순",
+    sortLogic: (a: ItemType, b: ItemType): number =>
+      parseInt(a.price) - parseInt(b.price),
+  },
+  {
+    title: "신규 상품순",
+    sortLogic: (a: ItemType, b: ItemType): number =>
+      a.title > b.title ? 1 : -1,
+  },
+  {
+    title: "할인율 순",
+    sortLogic: (a: ItemType, b: ItemType): number =>
+      parseInt(b.sale) - parseInt(a.sale),
+  },
 ];
 
 type ItemType = {
@@ -62,33 +91,28 @@ type ItemType = {
   src: string;
 };
 
-// const sortFunc = [
-//   () => {},
-//   () => {},
-//   (a: Object, b: Object) => {
-//     return a.price - b.price;
-//   },
-// ];
-
 export default function ItemList({
   data,
 }: {
   data: Array<ItemType>;
 }): JSX.Element {
-  const [sortState, setSortState] = useState({ y: "100%", sortIdx: 0 });
+  const [sortState, setSortState] = useState({ y: "100%", sortIdx: 0, data });
 
   return (
     <div>
       <Container>
-        <SortHeader
-          onClick={(): void => {
-            setSortState({ ...sortState, y: "0%" });
-          }}
-        >
-          {sortTitle[sortState.sortIdx]} ▼
+        <SortHeader>
+          <span
+            onClick={(): void => {
+              setSortState({ ...sortState, y: "0%" });
+            }}
+          >
+            {sortTypeArr[sortState.sortIdx].title} ▼
+          </span>
         </SortHeader>
+
         <Wrapper>
-          {data.map(
+          {sortState.data.map(
             (one: ItemType, idx: number): JSX.Element => (
               <MainItem key={idx + ""} width="48%" {...one}></MainItem>
             )
@@ -104,42 +128,21 @@ export default function ItemList({
           </span>
         </SortSelectHeader>
         <div>
-          <SelectOne
-            onClick={(): void => setSortState({ y: "100%", sortIdx: 0 })}
-          >
-            <span>기본 정렬순</span>
-            <CheckIcon show={sortState.sortIdx === 0}></CheckIcon>
-          </SelectOne>
-          <SelectOne
-            onClick={(): void => setSortState({ y: "100%", sortIdx: 1 })}
-          >
-            <span>인기 상품순</span>
-            <CheckIcon show={sortState.sortIdx === 1}></CheckIcon>
-          </SelectOne>
-          <SelectOne
-            onClick={(): void => setSortState({ y: "100%", sortIdx: 2 })}
-          >
-            <span>금액 높은순</span>
-            <CheckIcon show={sortState.sortIdx === 2}></CheckIcon>
-          </SelectOne>
-          <SelectOne
-            onClick={(): void => setSortState({ y: "100%", sortIdx: 3 })}
-          >
-            <span>금액 낮은순</span>
-            <CheckIcon show={sortState.sortIdx === 3}></CheckIcon>
-          </SelectOne>
-          <SelectOne
-            onClick={(): void => setSortState({ y: "100%", sortIdx: 4 })}
-          >
-            <span>신규 상품순</span>
-            <CheckIcon show={sortState.sortIdx === 4}></CheckIcon>
-          </SelectOne>
-          <SelectOne
-            onClick={(): void => setSortState({ y: "100%", sortIdx: 5 })}
-          >
-            <span>할인율 순</span>
-            <CheckIcon show={sortState.sortIdx === 5}></CheckIcon>
-          </SelectOne>
+          {sortTypeArr.map((one: SortType, sortIdx: number) => (
+            <SelectOne
+              key={sortIdx + ""}
+              onClick={(): void =>
+                setSortState({
+                  y: "100%",
+                  sortIdx,
+                  data: data.sort(one.sortLogic),
+                })
+              }
+            >
+              <span>{one.title}</span>
+              <CheckIcon show={sortState.sortIdx === sortIdx}></CheckIcon>
+            </SelectOne>
+          ))}
         </div>
       </SortSelect>
     </div>
