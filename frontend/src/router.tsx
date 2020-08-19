@@ -1,12 +1,22 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  RouteComponentProps,
+} from "react-router-dom";
 
 import { Home, Category, Search, Menu, Cart, Login, Register } from "./pages";
 import * as ROUTES from "./constants/routes";
 
+type CategoryType = {
+  mainCategory?: string;
+  subCategory?: string;
+};
+
 type route = {
   path: string;
-  component: () => JSX.Element;
+  component: (props: RouteComponentProps<CategoryType>) => JSX.Element;
 };
 
 const Routes: Array<route> = [
@@ -37,6 +47,16 @@ const Router = (): JSX.Element => {
     <BrowserRouter>
       <Switch>
         <Route exact path={ROUTES.LOGIN.path} component={Login} />
+        <Route
+          exact
+          path={`${ROUTES.CATEGORY.path}/:mainCategory/:subCategory`}
+          component={Category}
+        />
+        <Route
+          exact
+          path={`${ROUTES.CATEGORY.path}/:mainCategory`}
+          component={Category}
+        />
         <Route exact path={ROUTES.REGISTER.path} component={Register} />
         {Routes.map((item: route) => (
           <Route

@@ -11,8 +11,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   overscroll-behavior-y: none;
+  position: relative;
+  overflow: hidden;
 `;
 
 const Section = styled.div`
@@ -21,14 +22,20 @@ const Section = styled.div`
 `;
 
 type Props = {
+  mainCategory?: string;
+  subCategory?: string;
   children?: React.ReactNode;
 };
 
-const Layout = (props: Props): JSX.Element => {
+const Layout = ({
+  mainCategory = "",
+  subCategory,
+  children,
+}: Props): JSX.Element => {
   return (
     <Wrapper>
-      <Header />
-      <Section>{props.children}</Section>
+      <Header mainCategory={mainCategory} subCategory={subCategory} />
+      <Section>{children}</Section>
       <Footer />
     </Wrapper>
   );
