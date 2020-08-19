@@ -3,7 +3,7 @@ import { Layout, HorizontalSlider } from "../components/common";
 import Category from "../components/home/CategoryButtonArea";
 import MainItemContainer from "../components/home/MainItemContainer";
 import MainItemGallery from "../components/home/MainItemGallery";
-import Banner from "../components/home/Banner";
+import Banner from "../components/common/Banner";
 import Recommend from "../components/home/Recommend";
 import MainItem from "../components/home/MainItem";
 import PullTo from "../components/home/PullTo";
