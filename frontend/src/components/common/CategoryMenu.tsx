@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { History } from "history";
+import { KEY_NAME } from "../../constants/message";
 import { useHistory } from "react-router-dom";
 
 const Menu = styled.div`
@@ -28,6 +29,7 @@ const categoryGo = (history: History, baseUrl: string, name: string): void => {
 function makeRow(
   menuData: Array<string>,
   baseUrl: string,
+  mainCategoryName: string,
   idx: number
 ): JSX.Element {
   const history = useHistory();
@@ -39,7 +41,8 @@ function makeRow(
             key={idx + ""}
             onClick={(): void => categoryGo(history, baseUrl, one)}
           >
-            {one}
+            {/* {one} */}
+            {one && KEY_NAME[mainCategoryName].subCategory[one].name}
           </Menu>
         ))}
       </Row>
@@ -50,11 +53,11 @@ function makeRow(
 
 function splitArr(arr: Array<string>, colLength: number): Array<Array<string>> {
   let lastRow: Array<string> = [];
-  const result: Array<Array<string>> = [lastRow];
+  const result: Array<Array<string>> = [];
 
   arr.forEach((one: string, idx: number) => {
+    idx % colLength === 0 && result.push((lastRow = []));
     lastRow.push(one);
-    (idx + 1) % colLength === 0 && result.push((lastRow = []));
   });
 
   while (lastRow.length < colLength) lastRow.push("");
@@ -63,12 +66,14 @@ function splitArr(arr: Array<string>, colLength: number): Array<Array<string>> {
 }
 type CategoryMenuProps = {
   baseUrl: string;
+  mainCategoryName: string;
   categoryData: Array<string>;
   col?: number;
 };
 
 export default function CategoryMenu({
   baseUrl,
+  mainCategoryName,
   categoryData,
   col = 2,
 }: CategoryMenuProps): JSX.Element {
@@ -77,7 +82,7 @@ export default function CategoryMenu({
     <div>
       {arr.map(
         (one: Array<string>, idx: number): JSX.Element =>
-          makeRow(one, baseUrl, idx)
+          makeRow(one, baseUrl, mainCategoryName, idx)
       )}
     </div>
   );

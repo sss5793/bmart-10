@@ -30,13 +30,13 @@ const Category = ({
     (o) => o
   );
   const data = getItems(6);
-
   return (
     <Layout mainCategory={mainCategory} subCategory={subCategory}>
       {!subCategory && <Banner advertiseData={getAdsData()}></Banner>}
       {!subCategory && (
         <CategoryMenu
           baseUrl={`/category${"/" + mainCategory}`}
+          mainCategoryName={mainCategory}
           categoryData={subCategoryData}
         ></CategoryMenu>
       )}
