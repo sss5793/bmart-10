@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ItemDispatch, ItemContextType } from "./ItemContext";
+import ItemPrice from "./ItemPrice";
 
-import ItemTitle from './ItemTitle';
-import ItemPrice from './ItemPrice';
+const MARGIN_TOP = "0.3em";
 
-export default function ItemContent(props: any): JSX.Element {
-    const { price, sale, title } = props;
-    return (
-        <div>
-            <ItemTitle>{title}</ItemTitle>
-            <ItemPrice price={price} sale={sale}></ItemPrice>
-        </div>
-    );
+const ItemContentWrapper = styled.div`
+  margin-top: ${MARGIN_TOP};
+`;
+
+const ItemTitle = styled.div`
+  white-space: break-spaces;
+`;
+
+export default function ItemContent(): JSX.Element {
+  const { fontSize, title }: ItemContextType = useContext(ItemDispatch);
+
+  return (
+    <ItemContentWrapper>
+      <ItemTitle style={{ fontSize }}>{title}</ItemTitle>
+      <ItemPrice></ItemPrice>
+    </ItemContentWrapper>
+  );
 }

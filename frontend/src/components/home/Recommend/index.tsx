@@ -10,8 +10,6 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-type Props = {};
-
 const dummyMenuData = [
   "채소",
   "과일·견과·쌀",
@@ -31,7 +29,7 @@ const dummyMenuData = [
   "반려동물",
 ];
 
-export default function Recommend(props: Props): JSX.Element {
+export default function Recommend(): JSX.Element {
   const store = {
     flicking: undefined,
   };
