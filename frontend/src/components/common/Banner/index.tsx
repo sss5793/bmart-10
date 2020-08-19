@@ -18,6 +18,7 @@ type Advertise = {
 
 type Props = {
   advertiseData: Array<Advertise>;
+  size?: number;
 };
 
 export default function Banner(props: Props): JSX.Element {
@@ -40,7 +41,11 @@ export default function Banner(props: Props): JSX.Element {
         plugins={[new AutoPlay(undefined, "NEXT")]}
       >
         {props.advertiseData.map((advertise, index) => (
-          <Advertisement key={index} imageURL={advertise.imageURL} />
+          <Advertisement
+            key={index}
+            imageURL={advertise.imageURL}
+            size={props.size}
+          />
         ))}
       </Flicking>
       <Indicator size={props.advertiseData.length} observable={observable} />
