@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import Svg from "../Svg";
 
 import { COLOR, SVG } from "../../../constants/style";
+import { FOOTER } from "../../../constants/layout";
+
 import * as ROUTES from "../../../constants/routes";
 
 const Wrap = styled.div`
@@ -13,7 +15,7 @@ const Wrap = styled.div`
   z-index: 2000;
 
   width: 100%;
-  height: 80px;
+  height: ${FOOTER.SIZE}px;
   background-color: ${COLOR.WHITE};
   display: flex;
   justify-content: space-between;
