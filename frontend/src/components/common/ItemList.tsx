@@ -26,6 +26,7 @@ const SortSelect = styled.div`
   width: 100%;
   bottom: 0px;
   transition: transform 0.2s linear;
+  z-index: 2000;
 `;
 const SortSelectHeader = styled.div`
   display: flex;
@@ -37,6 +38,17 @@ const SelectOne = styled.div`
   padding: 24px;
   display: flex;
   justify-content: space-between;
+`;
+
+const SelectShadow = styled.div`
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  display: none;
+  opacity: 0.5;
+  z-index: 2000;
 `;
 
 const CheckIcon = ({ show }: { show: boolean }): JSX.Element => (
@@ -99,7 +111,11 @@ export default function ItemList({
   const [sortState, setSortState] = useState({ y: "100%", sortIdx: 0, data });
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
+      <SelectShadow
+        style={{ display: sortState.y === "100%" ? "none" : "block" }}
+        onClick={(): void => setSortState({ ...sortState, y: "100%" })}
+      ></SelectShadow>
       <Container>
         <SortHeader>
           <span
