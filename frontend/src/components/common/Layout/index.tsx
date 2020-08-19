@@ -10,8 +10,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   overscroll-behavior-y: none;
+  position: relative;
+  overflow: hidden;
 `;
 
 const Section = styled.div`
@@ -27,7 +28,7 @@ type Props = {
 };
 
 const Layout = ({
-  mainCategory,
+  mainCategory = "",
   subCategory,
   children,
 }: Props): JSX.Element => {

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { KEY_NAME } from "../../constants/message";
-import { Link, useHistory } from "react-router-dom";
 import MainItem from "../home/MainItem";
-
 const Container = styled.div`
   width: 100%;
   padding: 15px;
@@ -42,60 +39,106 @@ const SelectOne = styled.div`
   justify-content: space-between;
 `;
 
-export default function ItemList({ data }: any) {
-  const [translateY, setY] = useState("100%");
+const CheckIcon = ({ show }: { show: boolean }): JSX.Element => (
+  <i
+    className="fa fa-check"
+    style={{ fontSize: "1em", opacity: Number(show) }}
+  ></i>
+);
+
+const sortTitle = [
+  "기본 정렬순",
+  "인기 상품순",
+  "금액 높은순",
+  "금액 낮은순",
+  "신규 상품순",
+  "할인율 순",
+];
+
+type ItemType = {
+  title: string;
+  price: string;
+  sale: string;
+  src: string;
+};
+
+// const sortFunc = [
+//   () => {},
+//   () => {},
+//   (a: Object, b: Object) => {
+//     return a.price - b.price;
+//   },
+// ];
+
+export default function ItemList({
+  data,
+}: {
+  data: Array<ItemType>;
+}): JSX.Element {
+  const [sortState, setSortState] = useState({ y: "100%", sortIdx: 0 });
+
   return (
     <div>
       <Container>
         <SortHeader
-          onClick={() => {
-            setY("0%");
+          onClick={(): void => {
+            setSortState({ ...sortState, y: "0%" });
           }}
         >
-          기본 정렬 순 ▼
+          {sortTitle[sortState.sortIdx]} ▼
         </SortHeader>
         <Wrapper>
-          {data.map((one: any, idx: number) => (
-            <MainItem key={idx + ""} width="48%" {...one}></MainItem>
-          ))}
+          {data.map(
+            (one: ItemType, idx: number): JSX.Element => (
+              <MainItem key={idx + ""} width="48%" {...one}></MainItem>
+            )
+          )}
         </Wrapper>
       </Container>
-      <SortSelect style={{ transform: `translateY(${translateY})` }}>
+      <SortSelect style={{ transform: `translateY(${sortState.y})` }}>
         <SortSelectHeader>
           <span></span>
           <span>정렬</span>
-          <span
-            onClick={(one) => {
-              setY("100%");
-            }}
-          >
+          <span onClick={(): void => setSortState({ ...sortState, y: "100%" })}>
             닫기
           </span>
         </SortSelectHeader>
         <div>
-          <SelectOne>
+          <SelectOne
+            onClick={(): void => setSortState({ y: "100%", sortIdx: 0 })}
+          >
             <span>기본 정렬순</span>
-            <i className="fa fa-check" style={{ fontSize: "1em" }}></i>
+            <CheckIcon show={sortState.sortIdx === 0}></CheckIcon>
           </SelectOne>
-          <SelectOne>
+          <SelectOne
+            onClick={(): void => setSortState({ y: "100%", sortIdx: 1 })}
+          >
             <span>인기 상품순</span>
-            <i className="fa fa-check" style={{ fontSize: "1em" }}></i>
+            <CheckIcon show={sortState.sortIdx === 1}></CheckIcon>
           </SelectOne>
-          <SelectOne>
+          <SelectOne
+            onClick={(): void => setSortState({ y: "100%", sortIdx: 2 })}
+          >
             <span>금액 높은순</span>
-            <i className="fa fa-check" style={{ fontSize: "1em" }}></i>
+            <CheckIcon show={sortState.sortIdx === 2}></CheckIcon>
           </SelectOne>
-          <SelectOne>
+          <SelectOne
+            onClick={(): void => setSortState({ y: "100%", sortIdx: 3 })}
+          >
             <span>금액 낮은순</span>
-            <i className="fa fa-check" style={{ fontSize: "1em" }}></i>
+            <CheckIcon show={sortState.sortIdx === 3}></CheckIcon>
           </SelectOne>
-          <SelectOne>
+          <SelectOne
+            onClick={(): void => setSortState({ y: "100%", sortIdx: 4 })}
+          >
             <span>신규 상품순</span>
-            <i className="fa fa-check" style={{ fontSize: "1em" }}></i>
+            <CheckIcon show={sortState.sortIdx === 4}></CheckIcon>
           </SelectOne>
-          <SelectOne>
+          <SelectOne
+            onClick={(): void => setSortState({ y: "100%", sortIdx: 5 })}
+          >
             <span>할인율 순</span>
-            <i className="fa fa-check" style={{ fontSize: "1em" }}></i>
+            <CheckIcon show={sortState.sortIdx === 5}></CheckIcon>
           </SelectOne>
         </div>
       </SortSelect>

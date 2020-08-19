@@ -6,6 +6,11 @@ import { COLOR, SVG } from "../../../constants/style";
 import { KEY_NAME } from "../../../constants/message";
 import { useHistory } from "react-router-dom";
 
+type CategoryType = {
+  mainCategory: string;
+  subCategory?: string;
+};
+
 const Layer = styled.div`
   width: 100%;
   height: 80px;
@@ -24,18 +29,21 @@ const Title = styled.h2`
   color: #fff;
 `;
 
-const getCategoryName = (mainCategory: string, subCategory: string): string => {
+const getCategoryName = (
+  mainCategory: string,
+  subCategory: string | undefined
+): string => {
   if (subCategory) return KEY_NAME[mainCategory].subCategory[subCategory].name;
   return KEY_NAME[mainCategory]?.name;
 };
 
-const Header = ({ mainCategory, subCategory }: any) => {
+const Header = ({ mainCategory, subCategory }: CategoryType): JSX.Element => {
   const categoryName = getCategoryName(mainCategory, subCategory);
   const history = useHistory();
 
   return (
     <Layer>
-      <Item onClick={() => history.goBack()}>
+      <Item onClick={(): void => history.goBack()}>
         <svg width={36} height="36px">
           <path fill={COLOR.WHITE} d={SVG.ARROW_BACK} />
         </svg>

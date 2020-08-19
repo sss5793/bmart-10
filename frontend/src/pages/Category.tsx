@@ -1,4 +1,5 @@
 import React from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { Layout, HorizontalSlider } from "../components/common";
 import MainItem from "../components/home/MainItem";
 import CategoryMenu from "../components/common/CategoryMenu";
@@ -7,18 +8,6 @@ import { getAdsData, getItems } from "../mock";
 import { KEY_NAME } from "../constants/message";
 import ItemList from "../components/common/ItemList";
 
-const categoryData = [
-  "bread",
-  "egg",
-  "hot-dog",
-  "icecream",
-  "meal-kit",
-  "milk",
-  "salad",
-  "snacks",
-  "soap",
-];
-
 type Data = {
   title: string;
   price: string;
@@ -26,17 +15,16 @@ type Data = {
   src: string;
   width?: string;
 };
-// bread: {
-//   name: "빵 시리얼 잼",
-//   subCategory: {
-//     bread: { name: "빵" },
-//     cereal: { name: "시리얼" },
-//     riceCake: { name: "떡" },
-//     jam: { name: "잼 스프레드" },
-//   },
-// },
-const Category = ({ match }: any): JSX.Element => {
-  const mainCategory = match.params.mainCategory;
+
+type CategoryType = {
+  mainCategory?: string;
+  subCategory?: string;
+};
+
+const Category = ({
+  match,
+}: RouteComponentProps<CategoryType>): JSX.Element => {
+  const mainCategory = match.params.mainCategory || "";
   const subCategory = match.params.subCategory;
   const subCategoryData = Object.keys(KEY_NAME[mainCategory].subCategory).map(
     (o) => o
@@ -56,7 +44,7 @@ const Category = ({ match }: any): JSX.Element => {
         <HorizontalSlider
           title={"이 상품 어때요?"}
           isMore
-          onClick={() => {
+          onClick={(): void => {
             console.log("새로 나온거 더보기...");
           }}
         >

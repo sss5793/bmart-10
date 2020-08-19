@@ -3,10 +3,15 @@ type KeyName = {
 };
 
 type CategoryType = {
-  [name: string]: string | KeyName | CategoryType;
+  [name: string]: {
+    name: string;
+    subCategory: {
+      [key: string]: { [name: string]: string };
+    };
+  };
 };
 
-export const KEY_NAME: any = {
+export const KEY_NAME: CategoryType = {
   bread: {
     name: "빵 시리얼 잼",
     subCategory: {
@@ -35,7 +40,7 @@ export const KEY_NAME: any = {
       giblets: { name: "곱창 족발" },
     },
   },
-  icecream: { name: "아이스크림" },
+  icecream: { name: "아이스크림", subCategory: {} },
   "meal-kit": {
     name: "밀키트",
     subCategory: {
@@ -43,9 +48,9 @@ export const KEY_NAME: any = {
       cook: { name: "요리 반찬" },
     },
   },
-  milk: { name: "우유 유제품" },
-  salad: { name: "과일 샐러드" },
-  snacks: { name: "과자 초콜릿" },
-  soap: { name: "헤어 바디 세안" },
-  "three-lines": { name: "더보기" },
+  milk: { name: "우유 유제품", subCategory: {} },
+  salad: { name: "과일 샐러드", subCategory: {} },
+  snacks: { name: "과자 초콜릿", subCategory: {} },
+  soap: { name: "헤어 바디 세안", subCategory: {} },
+  "three-lines": { name: "더보기", subCategory: {} },
 };

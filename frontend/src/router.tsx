@@ -1,18 +1,22 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  RouteComponentProps,
+} from "react-router-dom";
 
 import { Home, Category, Search, Menu, Cart, Login, Register } from "./pages";
 import * as ROUTES from "./constants/routes";
 
-type routeParams = {
-  history?: any;
-  location?: any;
-  path?: any;
+type CategoryType = {
+  mainCategory?: string;
+  subCategory?: string;
 };
 
 type route = {
   path: string;
-  component: (props: routeParams) => JSX.Element;
+  component: (props: RouteComponentProps<CategoryType>) => JSX.Element;
 };
 
 const Routes: Array<route> = [

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { KEY_NAME } from "../../constants/message";
-import { Link, useHistory } from "react-router-dom";
+import { History } from "history";
+import { useHistory } from "react-router-dom";
 
 const Menu = styled.div`
   width: 50%;
@@ -20,7 +20,7 @@ const Row = styled.div`
 `;
 const SubCategory = styled.div``;
 
-const categoryGo = (history: any, baseUrl: string, name: string) => {
+const categoryGo = (history: History, baseUrl: string, name: string): void => {
   if (name === "") return;
   history.push(`${baseUrl}/${name}`);
 };
@@ -28,16 +28,16 @@ const categoryGo = (history: any, baseUrl: string, name: string) => {
 function makeRow(
   menuData: Array<string>,
   baseUrl: string,
-  idx: any
+  idx: number
 ): JSX.Element {
   const history = useHistory();
   return (
-    <RowContainer>
+    <RowContainer key={idx + ""}>
       <Row key={idx + ""}>
-        {menuData.map((one: any, idx: number) => (
+        {menuData.map((one: string, idx: number) => (
           <Menu
-            key={one + idx}
-            onClick={() => categoryGo(history, baseUrl, one)}
+            key={idx + ""}
+            onClick={(): void => categoryGo(history, baseUrl, one)}
           >
             {one}
           </Menu>
@@ -48,11 +48,11 @@ function makeRow(
   );
 }
 
-function splitArr(arr: Array<any>, colLength: number): Array<Array<any>> {
-  let lastRow: Array<any> = [];
-  const result: Array<Array<any>> = [lastRow];
+function splitArr(arr: Array<string>, colLength: number): Array<Array<string>> {
+  let lastRow: Array<string> = [];
+  const result: Array<Array<string>> = [lastRow];
 
-  arr.forEach((one: any, idx: number) => {
+  arr.forEach((one: string, idx: number) => {
     lastRow.push(one);
     (idx + 1) % colLength === 0 && result.push((lastRow = []));
   });
@@ -61,14 +61,24 @@ function splitArr(arr: Array<any>, colLength: number): Array<Array<any>> {
 
   return result;
 }
+type CategoryMenuProps = {
+  baseUrl: string;
+  categoryData: Array<string>;
+  col?: number;
+};
 
 export default function CategoryMenu({
   baseUrl,
   categoryData,
   col = 2,
-}: any): JSX.Element {
+}: CategoryMenuProps): JSX.Element {
   const arr = splitArr(categoryData, col);
   return (
-    <div>{arr.map((one: any, idx: number) => makeRow(one, baseUrl, idx))}</div>
+    <div>
+      {arr.map(
+        (one: Array<string>, idx: number): JSX.Element =>
+          makeRow(one, baseUrl, idx)
+      )}
+    </div>
   );
 }
