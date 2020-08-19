@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ItemDispatch, ItemContextType } from "./ItemContext";
+import { ItemContext, ItemContextType } from "./ItemContext";
 
 type ValueType = {
   fontSize?: string;
@@ -60,7 +60,7 @@ export default function ItemPrice(): JSX.Element {
     sale,
     saleValue = 0,
     discountedPrice,
-  }: ValueType = getValues(useContext(ItemDispatch));
+  }: ValueType = getValues(useContext(ItemContext));
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ItemDispatch, ItemContextType } from "./ItemContext";
+import { ItemContext, ItemContextType } from "./ItemContext";
 import ItemPrice from "./ItemPrice";
 
 const MARGIN_TOP = "0.3em";
@@ -14,7 +14,7 @@ const ItemTitle = styled.div`
 `;
 
 export default function ItemContent(): JSX.Element {
-  const { fontSize, title }: ItemContextType = useContext(ItemDispatch);
+  const { fontSize, title }: ItemContextType = useContext(ItemContext);
 
   return (
     <ItemContentWrapper>

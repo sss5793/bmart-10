@@ -8,4 +8,4 @@ export type ItemContextType = {
   src?: string;
   fontSize?: string;
 };
-export const ItemDispatch = React.createContext<ItemContextType>({});
+export const ItemContext = React.createContext<ItemContextType>({});
