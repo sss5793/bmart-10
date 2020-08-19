@@ -26,6 +26,19 @@ img {
   -webkit-user-drag: none;
 }
 
+a:link {
+  color: black;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
