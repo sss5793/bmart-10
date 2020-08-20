@@ -54,3 +54,7 @@ export const KEY_NAME: CategoryType = {
   soap: { name: "헤어 바디 세안", subCategory: {} },
   "three-lines": { name: "더보기", subCategory: {} },
 };
+
+export const MESSAGE = {
+  LOGIN_INDUCE: "로그인 후 주문이 가능합니다. \n 로그인 후 주문하시겠습니까?",
+};
