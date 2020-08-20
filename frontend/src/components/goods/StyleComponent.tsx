@@ -50,12 +50,12 @@ export const HideAreaHeader = styled.div`
   padding: 1em;
 `;
 
-export const Content = styled.div`
+export const HideAreaContent = styled.div`
   padding: 1em;
   border-top: 1px solid #eee;
 `;
 
-export const Counter = styled.div`
+export const CounterWapper = styled.div`
   border: 1px solid black;
   padding: 10px;
   display: inline-block;
