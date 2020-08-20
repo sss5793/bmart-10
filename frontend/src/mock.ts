@@ -1,4 +1,4 @@
-import itemData from "./ItemData.json";
+import jsonData from "./ItemData.json";
 
 const advertiseMockData = [
   {
@@ -15,12 +15,18 @@ const advertiseMockData = [
   },
 ];
 
+const itemData: Array<ItemType> = jsonData.map(
+  (one: ItemType, idx: number): ItemType =>
+    Object.assign(one, { goodId: idx + 1 })
+);
+
 type ImageUrl = { imageURL: string };
 export const getAdsData = (): Array<ImageUrl> => {
   return advertiseMockData;
 };
 
 export type ItemType = {
+  goodId?: number;
   title: string;
   price: string;
   sale: string;
@@ -28,4 +34,7 @@ export type ItemType = {
 };
 export const getItems = (count: number): Array<ItemType> => {
   return itemData.slice(0, count);
+};
+export const getItem = (goodId: number): ItemType | undefined => {
+  return itemData.find((item: ItemType) => item.goodId === goodId);
 };

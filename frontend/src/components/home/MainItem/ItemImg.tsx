@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ItemDispatch, ItemContextType } from "./ItemContext";
+import { ItemContext, ItemContextType } from "./ItemContext";
 
 type Style = {
   width?: string;
@@ -14,7 +14,6 @@ const BACKGROUND_SIZE = "cover";
 
 const ItemImage = styled.div`
   position: relative;
-  outline: 1px solid #eee;
 `;
 
 const HeartArea = styled.div`
@@ -60,7 +59,7 @@ const getStyle = ({ src, width = DEFAULT_WIDTH }: ItemContextType): Style => {
 };
 
 export default function ItemImg(): JSX.Element {
-  const style = getStyle(useContext(ItemDispatch));
+  const style = getStyle(useContext(ItemContext));
 
   return (
     <ItemImage style={style}>

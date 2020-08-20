@@ -5,6 +5,7 @@ import GalleryImage from "./GalleryImage";
 import MainItem from "../MainItem";
 
 type Data = {
+  goodId?: string | number;
   title: string;
   price: string;
   sale: string;
@@ -24,12 +25,11 @@ const GalleryImages = styled.div`
   margin-bottom: -10px;
 `;
 
-const MAIN_ITEM_FONT_SIZE = "17px";
 const MAIN_ITEM_WIDTH = "100%";
 
-export default function MainItemGallery({ data }: Props): JSX.Element {
+export default function MainItemGallery({ data: dataArr }: Props): JSX.Element {
   const [index, setIndex] = useState(0);
-  const { title, price, sale, src }: Data = data[index];
+  const dataOne: Data = dataArr[index];
 
   const setIdx = (idx: number): void => setIndex(idx);
   const convertDataToGalleryImage = (
@@ -47,15 +47,8 @@ export default function MainItemGallery({ data }: Props): JSX.Element {
   return (
     <GalleryWrapper>
       <GalleryHeader></GalleryHeader>
-      <GalleryImages>{data.map(convertDataToGalleryImage)}</GalleryImages>
-      <MainItem
-        fontSize={MAIN_ITEM_FONT_SIZE}
-        title={title}
-        price={price}
-        sale={sale}
-        width={MAIN_ITEM_WIDTH}
-        src={src}
-      ></MainItem>
+      <GalleryImages>{dataArr.map(convertDataToGalleryImage)}</GalleryImages>
+      <MainItem width={MAIN_ITEM_WIDTH} {...dataOne}></MainItem>
     </GalleryWrapper>
   );
 }

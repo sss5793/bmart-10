@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ItemImg from "./ItemImg";
 import ItemContent from "./ItemContent";
-import { ItemDispatch, ItemContextType } from "./ItemContext";
+import { ItemContext, ItemContextType } from "./ItemContext";
+import { useHistory } from "react-router-dom";
 
 const DEFAULT_WIDTH = "107px";
 const wordBreak = "keep-all";
@@ -15,12 +16,16 @@ export default function MainItem({
   width = DEFAULT_WIDTH,
   ...props
 }: ItemContextType): JSX.Element {
+  const history = useHistory();
   return (
-    <ItemDispatch.Provider value={{ width, ...props }}>
-      <ItemArea style={{ width, wordBreak }}>
+    <ItemContext.Provider value={{ width, ...props }}>
+      <ItemArea
+        onClick={(): void => history.push(`/goods/${props.goodId}`)}
+        style={{ width, wordBreak }}
+      >
         <ItemImg></ItemImg>
         <ItemContent></ItemContent>
       </ItemArea>
-    </ItemDispatch.Provider>
+    </ItemContext.Provider>
   );
 }

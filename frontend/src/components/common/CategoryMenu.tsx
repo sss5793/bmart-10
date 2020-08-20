@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 const Menu = styled.div`
   width: 50%;
-  line-height: 2em;
+  padding: 1em;
   &:not(:last-child) {
     border-right: 1px solid #f6f6f6;
   }
@@ -17,7 +17,6 @@ const RowContainer = styled.div``;
 const Row = styled.div`
   display: flex;
   border-bottom: 1px solid #f6f6f6;
-  text-align: center;
 `;
 const SubCategory = styled.div``;
 

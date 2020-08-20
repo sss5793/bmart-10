@@ -15,6 +15,7 @@ const Goods = styled.div`
 `;
 
 type Data = {
+  goodId?: string | number;
   title: string;
   price: string;
   sale?: string;
@@ -29,19 +30,8 @@ type Props = {
 
 const MAIN_ITEM_FONT_SIZE = "12px";
 
-const convertDataToMainItem = (
-  { title, price, sale, src, width }: Data,
-  idx: number
-): JSX.Element => (
-  <MainItem
-    key={idx + ""}
-    title={title}
-    price={price}
-    fontSize={MAIN_ITEM_FONT_SIZE}
-    sale={sale}
-    width={width}
-    src={src}
-  ></MainItem>
+const convertDataToMainItem = (data: Data, idx: number): JSX.Element => (
+  <MainItem key={idx + ""} fontSize={MAIN_ITEM_FONT_SIZE} {...data}></MainItem>
 );
 
 const next = (
