@@ -5,3 +5,8 @@ export const HEADER = {
 export const FOOTER = {
   SIZE: 80,
 };
+
+export const PULL_TO = {
+  SIZE: 150,
+  THRESHOLD: 100,
+};
