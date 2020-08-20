@@ -9,6 +9,8 @@ import MainItem from "../components/home/MainItem";
 import PullTo from "../components/home/PullTo";
 import { getAdsData, getItems } from "../mock";
 
+import { PULL_TO } from "../constants/layout";
+
 type Data = {
   title: string;
   price: string;
@@ -35,7 +37,11 @@ export default function Home(): JSX.Element {
   };
 
   function onTouchStart(event: React.TouchEvent<HTMLDivElement>): void {
-    const { screenY } = event.touches[0];
+    const { screenY, pageY, clientY } = event.touches[0];
+
+    if (Math.round(pageY) > Math.round(clientY) + PULL_TO.THRESHOLD) {
+      return;
+    }
     isScroll = true;
     scrollStart = screenY;
   }
@@ -52,12 +58,12 @@ export default function Home(): JSX.Element {
 
     const { screenY } = event.touches[0];
 
-    if (screenY - scrollStart < 0) {
+    if (screenY - scrollStart < 0 && scrollStart + PULL_TO.SIZE < screenY) {
       isScroll = false;
       return;
     }
 
-    observable.trigger(screenY - scrollStart);
+    observable.trigger(Math.min(screenY - scrollStart, PULL_TO.SIZE));
   }
 
   return (
@@ -79,24 +85,12 @@ export default function Home(): JSX.Element {
         <MainItemContainer data={itemData.slice(0, 30)}>
           지금 뭐 먹지?
         </MainItemContainer>
-        <HorizontalSlider
-          title={"새로 나왔어요"}
-          isMore
-          onClick={(): void => {
-            console.log("새로 나온거 더보기...");
-          }}
-        >
+        <HorizontalSlider title={"새로 나왔어요"} isMore>
           {data.map((item: Data, idx: number) => (
             <MainItem key={idx + ""} {...item} />
           ))}
         </HorizontalSlider>
-        <HorizontalSlider
-          title={"요즘 잘 팔려요"}
-          isMore
-          onClick={(): void => {
-            console.log("요즘 잘 팔리는거 더보기...");
-          }}
-        >
+        <HorizontalSlider title={"요즘 잘 팔려요"} isMore>
           {data.map((item: Data, idx: number) => (
             <MainItem key={idx + ""} {...item} />
           ))}

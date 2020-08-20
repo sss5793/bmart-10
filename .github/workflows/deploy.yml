@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: stop server via ssh
+      - name: stop server via ssh and build
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -22,23 +22,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             pm2 stop bmart-server
-
-      # git repository 코드를 업데이트 한다.
-      - name: Update git repository
-        run: |
-          cd project/bmart-10/
-          git pull origin release
-
-      # frontend package install & build
-      - name: Setting frontend
-        run: |
-          cd project/bmart-10/frontend/
-          yarn install
-          yarn build
-
-      # backend package install & start
-      - name: Update git repository
-        run: |
-          cd project/bmart-10/backend/
-          yarn install
-          pm2 start bmart-server
+            cd project/bmart-10
+            git pull origin release
+            cd /frontend
+            yarn install
+            yarn build
+            cd ../backend
+            yarn install
+            pm2 start bmart-server

@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
 export default styled.input`
-  width: calc(100% - 24px - 10px - 24px);
-  height: 24px;
-  margin-left: 8px;
-  margin-right: 16px;
+  width: calc(100% - 30px - 10px);
+  height: 30px;
+  margin: 0 10px 0 10px;
 
   background-color: transparent;
   border: none;
 
   font-weight: medium;
   color: #8b95a1;
-  font-size: 17px;
+  font-size: 20px;
 
   :focus {
     outline: none;

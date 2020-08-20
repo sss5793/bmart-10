@@ -6,12 +6,22 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
-import { Home, Category, Search, Menu, Cart, Login, Register } from "./pages";
+import {
+  Home,
+  Category,
+  Search,
+  Menu,
+  Cart,
+  Login,
+  Register,
+  Goods,
+} from "./pages";
 import * as ROUTES from "./constants/routes";
 
-type CategoryType = {
+export type CategoryType = {
   mainCategory?: string;
   subCategory?: string;
+  goodId?: string;
 };
 
 type route = {
@@ -27,6 +37,10 @@ const Routes: Array<route> = [
   {
     path: ROUTES.CATEGORY.path,
     component: Category,
+  },
+  {
+    path: ROUTES.GOODS.path,
+    component: Goods,
   },
   {
     path: ROUTES.SEARCH.path,

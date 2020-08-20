@@ -5,6 +5,8 @@ import Header from "./Header";
 import Menus from "./Menus";
 import List from "./List";
 
+import { HEADER, FOOTER } from "../../../constants/layout";
+
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
@@ -33,12 +35,18 @@ export default function Recommend(): JSX.Element {
   const store = {
     flicking: undefined,
   };
+  const screeHeight = screen.height;
+  const MenusHeight = 30;
 
   return (
     <Wrapper>
       <Header />
-      <Menus menus={dummyMenuData} store={store} />
-      <List store={store} menus={dummyMenuData} />
+      <Menus innerHeight={MenusHeight} menus={dummyMenuData} store={store} />
+      <List
+        innerHeight={screeHeight - (HEADER.SIZE + FOOTER.SIZE + MenusHeight)}
+        store={store}
+        menus={dummyMenuData}
+      />
     </Wrapper>
   );
 }
