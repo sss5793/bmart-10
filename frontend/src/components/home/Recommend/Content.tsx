@@ -3,8 +3,10 @@ import styled from "styled-components";
 
 import MainItem from "../MainItem";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ innerHeight: number | undefined }>`
   width: 100%;
+  ${(props): string | null =>
+    props.innerHeight ? `height: ${props.innerHeight}px;` : null}
   border: 1px solid #000;
 
   display: flex;
@@ -19,9 +21,13 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
-export default function Menus(): JSX.Element {
+type Props = {
+  height?: number;
+};
+
+export default function Content(props: Props): JSX.Element {
   return (
-    <Wrapper>
+    <Wrapper innerHeight={props.height}>
       <Row>
         <MainItem></MainItem>
         <MainItem></MainItem>

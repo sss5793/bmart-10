@@ -1,13 +1,11 @@
 # This is a basic workflow to help you get started with Actions
 
+name: Deploy Project to Amazon EC2
+
 on:
   push:
     branches:
       - release
-
-name: Deploy Project to Amazon EC2
-env:
-  PROJECT_NAME: action_codedeploy
 
 jobs:
   deploy:
@@ -15,13 +13,20 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-        
-      - name: set package 
-        run: yarn install
-        shell: bash
-
-      - name: Build Project
-        run: yarn build
-        shell: bash
+      - uses: actions/checkout@v2
+      - name: stop server via ssh and build
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            pm2 stop bmart-server
+            cd project/bmart-10
+            git pull origin release
+            cd /frontend
+            yarn install
+            yarn build
+            cd ../backend
+            yarn install
+            pm2 start bmart-server
