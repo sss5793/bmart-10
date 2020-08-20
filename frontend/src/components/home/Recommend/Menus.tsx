@@ -3,13 +3,15 @@ import Flicking from "@egjs/react-flicking";
 import { FlickingEvent } from "@egjs/flicking";
 import styled from "styled-components";
 
-import Section from "./Menu";
+import Menu from "./Menu";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ innerHeight: number }>`
   width: 100%;
+  height: ${(props): number => props.innerHeight}px;
 `;
 
 type Props = {
+  innerHeight?: number;
   menus: Array<string>;
   store: {
     flicking: Flicking | undefined;
@@ -36,7 +38,7 @@ export default function Menus(props: Props): JSX.Element {
   };
 
   return (
-    <Wrapper>
+    <Wrapper innerHeight={props.innerHeight || 50}>
       <Flicking
         duration={500}
         gap={10}
@@ -54,7 +56,7 @@ export default function Menus(props: Props): JSX.Element {
         autoResize={true}
       >
         {props.menus.reverse().map((menu, index) => (
-          <Section key={`menu.${index}`} menu={menu} observable={observable} />
+          <Menu key={`menu.${index}`} menu={menu} observable={observable} />
         ))}
       </Flicking>
     </Wrapper>
