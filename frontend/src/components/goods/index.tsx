@@ -16,33 +16,18 @@ import {
   ItemImg,
   ItemContent,
 } from "./StyleComponent";
+import { useHistory } from "react-router-dom";
 import { getItem, ItemType } from "../../mock";
 import MainItem from "../home/MainItem";
 import DeliveryInfo from "./DeliveryInfo";
 import ReturnExchangeInfo from "./ReturnExchangeInfo";
+import InfoSummary from "./InfoSummary";
 
-function InfoSummary(): JSX.Element {
-  return (
-    <ul>
-      <li>
-        <span>배달 정보</span>
-        <span>가장 필요할 때, 필요한 만큼만 번쩍배달</span>
-      </li>
-      <li>
-        <span></span>
-        <span>배달 시간 22~33분 예상|새벽 2시까지 주문 가능</span>
-      </li>
-      <li>
-        <span>적립 혜택</span>
-        <span>배민 페이로 결제하면 포인트 0.5% 적립</span>
-      </li>
-      <li>
-        <span>원산지 표시</span>
-        <span>하단 상세 내용 참고</span>
-      </li>
-    </ul>
-  );
-}
+import styled from "styled-components";
+
+const Container = styled.div`
+  margin-top: -15px;
+`;
 
 const getPrice = (item: ItemType | undefined): number => {
   return (
@@ -54,12 +39,13 @@ export default function Goods({ goodId }: { goodId: string }): JSX.Element {
   const item = getItem(parseInt(goodId));
   const price = getPrice(item);
 
-  const [yPercent, setYPercent] = useState({ y: "0%" });
+  const [yPercent, setYPercent] = useState({ y: "100%" });
   const [count, setCount] = useState(1);
 
+  const history = useHistory();
   return (
-    <div style={{ marginTop: "-15px" }}>
-      <MainItem width="100%" {...item}></MainItem>
+    <Container>
+      <MainItem width="100%" padding="0.5em 1em" {...item}></MainItem>
       <InfoSummary></InfoSummary>
       <EtcInfo>
         <DeliveryInfo></DeliveryInfo>
@@ -86,7 +72,8 @@ export default function Goods({ goodId }: { goodId: string }): JSX.Element {
             <ItemInfo>
               <ul>
                 <li>{item?.title}</li>
-                <li>{item?.price}</li>
+                <li>1회 최대 구매수량 10개</li>
+                <li>{price}원</li>
               </ul>
             </ItemInfo>
             <Counter>
@@ -98,18 +85,22 @@ export default function Goods({ goodId }: { goodId: string }): JSX.Element {
                 -
               </PlusMinusSpan>
               <CounterText>{count}</CounterText>
-              <PlusMinusSpan onClick={(): void => setCount(count + 1)}>
+              <PlusMinusSpan
+                onClick={(): void => {
+                  count < 10 && setCount(count + 1);
+                }}
+              >
                 +
               </PlusMinusSpan>
             </Counter>
           </ItemContent>
 
-          <BagButton>
+          <BagButton onClick={(): void => history.goBack()}>
             <span>{count}개 담기 </span>
             <RightSpan>{count * price}원</RightSpan>
           </BagButton>
         </Content>
       </HideArea>
-    </div>
+    </Container>
   );
 }
