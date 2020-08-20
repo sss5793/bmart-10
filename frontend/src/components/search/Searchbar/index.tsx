@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import FixedBox from "./FixedBox";
@@ -7,46 +7,31 @@ import SearchIcon from "./SeachIcon";
 import DeleteButton from "./DeleteButton";
 
 const Wrapper = styled.div`
+  z-index: 1000;
+  position: fixed;
+  padding: 10px;
+
   width: 100%;
 
-  display: flex;
-  justify-content: center;
   background-color: #fff;
-
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1000;
 `;
 
-type Props = {};
+export default function SearchBar(): JSX.Element {
+  const [showDelete, setShowDelete] = useState(false);
 
-type States = {
-  showX: boolean;
-};
-
-export default class SearchBar extends Component<Props, States> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      showX: false,
-    };
-    this.updateFilter = this.updateFilter.bind(this);
-    this.deleteFilter = this.deleteFilter.bind(this);
-  }
-
-  updateFilter(event: React.KeyboardEvent<HTMLInputElement>): void {
+  function updateFilter(event: React.KeyboardEvent<HTMLInputElement>): void {
     const filter = (event.target as HTMLInputElement).value;
 
     if (filter.length > 0) {
-      this.setState({
-        showX: true,
-      });
+      setShowDelete(true);
+    } else {
+      setShowDelete(false);
     }
   }
 
-  deleteFilter(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  function deleteFilter(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
     const input = (event.target as HTMLInputElement).parentNode?.querySelector(
       "input"
     );
@@ -55,22 +40,16 @@ export default class SearchBar extends Component<Props, States> {
       input.value = "";
     }
 
-    this.setState({
-      showX: false,
-    });
+    setShowDelete(false);
   }
 
-  render(): JSX.Element {
-    return (
-      <Wrapper>
-        <FixedBox>
-          <SearchIcon />
-          <Input placeholder="상품 검색" onKeyUp={this.updateFilter}></Input>
-          {this.state.showX ? (
-            <DeleteButton onClick={this.deleteFilter}>X</DeleteButton>
-          ) : null}
-        </FixedBox>
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper>
+      <FixedBox>
+        <SearchIcon />
+        <Input placeholder="상품 검색" onKeyUp={updateFilter} />
+        <DeleteButton onClick={deleteFilter} show={showDelete} />
+      </FixedBox>
+    </Wrapper>
+  );
 }
