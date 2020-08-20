@@ -63,7 +63,6 @@ export default function SearchBar(): JSX.Element {
 
             getGoodsByName(query).then((res) => {
               if (res.success) {
-                console.log(res.data);
                 dispatch({ type: "SET_GOODS", goods: res.data.goods });
               }
             });
