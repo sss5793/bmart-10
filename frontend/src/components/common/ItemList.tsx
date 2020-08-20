@@ -21,12 +21,12 @@ const Wrapper = styled.div`
 
 const SortSelect = styled.div`
   border-radius: 15px 15px 0px 0px;
-  position: absolute;
+  position: fixed;
   background-color: #eee;
   width: 100%;
   bottom: 0px;
   transition: transform 0.2s linear;
-  z-index: 2000;
+  z-index: 3000;
 `;
 const SortSelectHeader = styled.div`
   display: flex;
@@ -44,11 +44,11 @@ const SelectShadow = styled.div`
   background-color: #000;
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0px;
   display: none;
   opacity: 0.5;
-  z-index: 2000;
+  z-index: 3000;
 `;
 
 const CheckIcon = ({ show }: { show: boolean }): JSX.Element => (
