@@ -6,6 +6,8 @@ import Input from "./Input";
 import SearchIcon from "./SeachIcon";
 import DeleteButton from "./DeleteButton";
 
+import { useSearchDispatch } from "../../../contexts/SearchContext";
+
 import getGoodsByName from "../../../fetch/goods/getGoodsByName";
 
 const Wrapper = styled.div`
@@ -21,6 +23,8 @@ const Wrapper = styled.div`
 export default function SearchBar(): JSX.Element {
   const [showDelete, setShowDelete] = useState(false);
   const [query, setQuery] = useState("");
+
+  const dispatch = useSearchDispatch();
 
   function updateFilter(event: React.KeyboardEvent<HTMLInputElement>): void {
     const filter = (event.target as HTMLInputElement).value;
@@ -52,10 +56,16 @@ export default function SearchBar(): JSX.Element {
       <FixedBox>
         <Input placeholder="상품 검색" onKeyUp={updateFilter} />
         <DeleteButton onClick={deleteFilter} show={showDelete} />
+
         <SearchIcon
           onClick={(): void => {
+            if (query.length === 0) return;
+
             getGoodsByName(query).then((res) => {
-              console.log(res);
+              if (res.success) {
+                console.log(res.data);
+                dispatch({ type: "SET_GOODS", goods: res.data.goods });
+              }
             });
           }}
         />
