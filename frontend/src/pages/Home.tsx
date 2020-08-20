@@ -79,24 +79,12 @@ export default function Home(): JSX.Element {
         <MainItemContainer data={itemData.slice(0, 30)}>
           지금 뭐 먹지?
         </MainItemContainer>
-        <HorizontalSlider
-          title={"새로 나왔어요"}
-          isMore
-          onClick={(): void => {
-            console.log("새로 나온거 더보기...");
-          }}
-        >
+        <HorizontalSlider title={"새로 나왔어요"} isMore>
           {data.map((item: Data, idx: number) => (
             <MainItem key={idx + ""} {...item} />
           ))}
         </HorizontalSlider>
-        <HorizontalSlider
-          title={"요즘 잘 팔려요"}
-          isMore
-          onClick={(): void => {
-            console.log("요즘 잘 팔리는거 더보기...");
-          }}
-        >
+        <HorizontalSlider title={"요즘 잘 팔려요"} isMore>
           {data.map((item: Data, idx: number) => (
             <MainItem key={idx + ""} {...item} />
           ))}

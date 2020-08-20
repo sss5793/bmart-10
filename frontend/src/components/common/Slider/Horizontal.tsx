@@ -35,21 +35,28 @@ const More = styled.p`
 
 const ItemWrapper = styled.div`
   overflow-x: auto;
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch; /* 끝에서 바운스 되도록*/
+  scroll-snap-type: x mandatory;
 
   > div {
     margin: 0;
-    margin-right: 10px;
-    display: inline-table;
+    margin-left: 10px;
+    flex: 0 0 auto;
 
     &:first-child {
       margin-left: 15px;
     }
 
     &:last-child {
-      margin-right: 15px;
+      margin-left: 0;
     }
   }
+`;
+
+const LastItem = styled.div`
+  width: 15px;
 `;
 
 const Horizontal = ({
@@ -62,9 +69,12 @@ const Horizontal = ({
     <Wrapper>
       <TitleWrapper>
         <Title>{title}</Title>
-        {isMore && <More onClick={onClick}>더보기 &gt; </More>}
+        {isMore && <More onClick={onClick}>더보기 &gt;</More>}
       </TitleWrapper>
-      <ItemWrapper>{children}</ItemWrapper>
+      <ItemWrapper>
+        {children}
+        <LastItem />
+      </ItemWrapper>
     </Wrapper>
   );
 };
