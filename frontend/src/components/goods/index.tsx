@@ -6,12 +6,9 @@ import {
   Shadow,
   HideArea,
   HideAreaHeader,
-  Content,
-  Counter,
-  CounterText,
+  HideAreaContent,
   BagButton,
   RightSpan,
-  PlusMinusSpan,
   ItemInfo,
   ItemImg,
   ItemContent,
@@ -22,6 +19,7 @@ import MainItem from "../home/MainItem";
 import DeliveryInfo from "./DeliveryInfo";
 import ReturnExchangeInfo from "./ReturnExchangeInfo";
 import InfoSummary from "./InfoSummary";
+import Counter from "./Counter";
 
 import styled from "styled-components";
 
@@ -65,7 +63,7 @@ export default function Goods({ goodId }: { goodId: string }): JSX.Element {
             닫기
           </RightSpan>
         </HideAreaHeader>
-        <Content>
+        <HideAreaContent>
           <ItemContent>
             <ItemImg style={{ backgroundImage: `url(${item?.src})` }}></ItemImg>
 
@@ -76,30 +74,13 @@ export default function Goods({ goodId }: { goodId: string }): JSX.Element {
                 <li>{price}원</li>
               </ul>
             </ItemInfo>
-            <Counter>
-              <PlusMinusSpan
-                onClick={(): void => {
-                  count > 1 && setCount(count - 1);
-                }}
-              >
-                -
-              </PlusMinusSpan>
-              <CounterText>{count}</CounterText>
-              <PlusMinusSpan
-                onClick={(): void => {
-                  count < 10 && setCount(count + 1);
-                }}
-              >
-                +
-              </PlusMinusSpan>
-            </Counter>
+            <Counter setCount={setCount} count={count}></Counter>
           </ItemContent>
-
           <BagButton onClick={(): void => history.goBack()}>
             <span>{count}개 담기 </span>
             <RightSpan>{count * price}원</RightSpan>
           </BagButton>
-        </Content>
+        </HideAreaContent>
       </HideArea>
     </Container>
   );

@@ -23,7 +23,6 @@ function ItemContentWrapper({
 
 export default function ItemContent(): JSX.Element {
   const { title, padding, fontSize }: ItemContextType = useContext(ItemContext);
-  console.log(fontSize, 123);
   return (
     <ItemContentWrapper padding={padding} fontSize={fontSize}>
       <>
