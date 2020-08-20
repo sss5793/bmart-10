@@ -1,39 +1,82 @@
-import React, { UIEvent } from "react";
+import React from "react";
 import Flicking from "@egjs/react-flicking";
 import styled from "styled-components";
 
-import Section from "./Section";
+import Content from "./Content";
 
-const Wrapper = styled.div`
+const HEIGHT = 400;
+const THRESHOLD = 2800;
+
+const Wrapper = styled.div<{ innerHeight: number }>`
   width: 100%;
-  overflow-y: scroll;
+  height: ${(props): number => props.innerHeight}px;
 
-  height: calc(100vh - 200px);
-  /* height: 318px; */
+  overflow-y: scroll;
 `;
 
 type Props = {
+  innerHeight?: number;
+  contentHeight?: number;
   store: {
     flicking: Flicking | undefined;
   };
   menus: Array<string>;
 };
 
-export default function Menus(props: Props): JSX.Element {
+const changeMenus = (scrollTop: number, props: Props): void => {
+  if (props.store.flicking) {
+    props.store.flicking.moveTo(Math.floor(scrollTop / HEIGHT), 300);
+  }
+};
+
+const focusToThis = (pageY: number): void => {
+  if (pageY > THRESHOLD) {
+    window.scroll({
+      behavior: "smooth",
+      top: THRESHOLD,
+    });
+  }
+};
+
+export default function List(props: Props): JSX.Element {
+  let element: HTMLDivElement;
+  let debounceFlag = false;
+  const debounceTime = 20;
+
   return (
     <Wrapper
-      onScroll={(
-        e: React.UIEvent<HTMLDivElement, globalThis.UIEvent>
+      innerHeight={props.innerHeight || HEIGHT}
+      onScrollCapture={(
+        event: React.UIEvent<HTMLDivElement, UIEvent>
       ): void => {
-        const { scrollTop } = e.target as HTMLDivElement;
+        if (debounceFlag) return;
+        const { scrollTop } = event.target as HTMLDivElement;
 
-        if (props.store.flicking) {
-          props.store.flicking.moveTo(Math.floor(scrollTop / 318), 500);
+        debounceFlag = true;
+        changeMenus(scrollTop, props);
+
+        setTimeout(() => {
+          debounceFlag = false;
+        }, debounceTime);
+      }}
+      onTouchStart={(event: React.TouchEvent<HTMLDivElement>): void => {
+        // 불필요한 focusing을 막기 위해 List 컴포넌트의 위치를 이용해 분기
+        if (element) {
+          const { top } = element.getBoundingClientRect();
+
+          if (top > 110) {
+            const { pageY } = event.touches[0];
+
+            focusToThis(pageY);
+          }
         }
+      }}
+      ref={(e: HTMLDivElement | null): void => {
+        if (e) element = e;
       }}
     >
       {props.menus.map((menu, index) => (
-        <Section key={`${menu}.${index}`}></Section>
+        <Content key={`${menu}.${index}`} height={HEIGHT}></Content>
       ))}
     </Wrapper>
   );
