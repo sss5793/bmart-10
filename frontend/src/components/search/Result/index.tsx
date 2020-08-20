@@ -9,14 +9,10 @@ const Wrapper = styled.div`
   padding: 10px;
 
   width: 100%;
-
-  background-color: #fff;
 `;
 
 export default function SearchBar(): JSX.Element {
   const state = useSearchState();
-
-  console.log(state);
   return (
     <Wrapper>
       {state.searchResult.map((cur) => {
