@@ -1,5 +1,5 @@
 import { API_HOST } from "../../constants/API";
-import { Goods } from "../../types/Goods";
+import { Good } from "../../types/Good";
 
 export type APIResponse =
   | {
@@ -8,7 +8,7 @@ export type APIResponse =
   | {
       success: true;
       data: {
-        goods: Goods[];
+        goods: Good[];
       };
     };
 

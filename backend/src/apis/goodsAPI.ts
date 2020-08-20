@@ -47,7 +47,7 @@ router.get("/:name", async (request: Request, response: Response) => {
   const result = await goodsDAO.search(name);
   apiResponse.success = true;
   apiResponse.data = {
-    rows: result,
+    goods: result,
   };
 
   response.status(200).send(apiResponse);

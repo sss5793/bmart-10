@@ -1,4 +1,4 @@
-export type Goods = {
+export type Good = {
   id?: number;
   name: string;
   categoryName: string;
