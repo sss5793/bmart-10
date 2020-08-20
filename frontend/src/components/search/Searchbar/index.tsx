@@ -6,6 +6,10 @@ import Input from "./Input";
 import SearchIcon from "./SeachIcon";
 import DeleteButton from "./DeleteButton";
 
+import { useSearchDispatch } from "../../../contexts/SearchContext";
+
+import getGoodsByName from "../../../fetch/goods/getGoodsByName";
+
 const Wrapper = styled.div`
   z-index: 1000;
   position: fixed;
@@ -18,10 +22,13 @@ const Wrapper = styled.div`
 
 export default function SearchBar(): JSX.Element {
   const [showDelete, setShowDelete] = useState(false);
+  const [query, setQuery] = useState("");
+
+  const dispatch = useSearchDispatch();
 
   function updateFilter(event: React.KeyboardEvent<HTMLInputElement>): void {
     const filter = (event.target as HTMLInputElement).value;
-
+    setQuery(filter);
     if (filter.length > 0) {
       setShowDelete(true);
     } else {
@@ -40,15 +47,27 @@ export default function SearchBar(): JSX.Element {
       input.value = "";
     }
 
+    setQuery("");
     setShowDelete(false);
   }
 
   return (
     <Wrapper>
       <FixedBox>
-        <SearchIcon />
         <Input placeholder="상품 검색" onKeyUp={updateFilter} />
         <DeleteButton onClick={deleteFilter} show={showDelete} />
+
+        <SearchIcon
+          onClick={(): void => {
+            if (query.length === 0) return;
+
+            getGoodsByName(query).then((res) => {
+              if (res.success) {
+                dispatch({ type: "SET_GOODS", goods: res.data.goods });
+              }
+            });
+          }}
+        />
       </FixedBox>
     </Wrapper>
   );

@@ -16,7 +16,7 @@ const Wrapper = styled.button<{ show: boolean }>`
   height: 30px;
 
   position: absolute;
-  right: 20px;
+  right: 50px;
 
   font-size: 16px;
   color: #8b95a1;
