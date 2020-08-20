@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ItemContext, ItemContextType } from "./ItemContext";
 
 type ValueType = {
-  fontSize?: string;
   price?: string;
   sale?: string;
   saleValue?: number;
@@ -13,15 +12,16 @@ type ValueType = {
 const DEFAULT_PRICE = "0";
 const DEFAULT_SALE = "0%";
 
-const FONT_SIZE = "10px";
 const MARGIN_TOP = "-5px";
 
 const Sale = styled.span`
+  font-size: 1em;
   font-weight: 800;
   color: #f01616;
 `;
 
 const Price = styled.span`
+  font-size: 1em;
   padding-left: 3px;
   font-weight: 500;
   color: #bbb;
@@ -43,36 +43,29 @@ const getDiscountPrice = (price: string, saleValue: number): number => {
 };
 
 const getValues = ({
-  fontSize = FONT_SIZE,
   price = DEFAULT_PRICE,
   sale = DEFAULT_SALE,
 }: ItemContextType): ValueType => {
   const saleValue: number = getSaleValue(sale);
   const discountedPrice = getDiscountPrice(price, saleValue);
 
-  return { fontSize, price, sale, saleValue, discountedPrice };
+  return { price, sale, saleValue, discountedPrice };
 };
 
 export default function ItemPrice(): JSX.Element {
-  const {
-    fontSize,
-    price,
-    sale,
-    saleValue = 0,
-    discountedPrice,
-  }: ValueType = getValues(useContext(ItemContext));
+  const { price, sale, saleValue = 0, discountedPrice }: ValueType = getValues(
+    useContext(ItemContext)
+  );
 
   return (
     <div>
       {saleValue > 0 && (
         <div style={{ marginTop: MARGIN_TOP }}>
-          <Sale style={{ fontSize }}>{sale}</Sale>
-          <Price style={{ fontSize }}>{price}원</Price>
+          <Sale>{sale}</Sale>
+          <Price>{price}원</Price>
         </div>
       )}
-      <DiscountedPrice style={{ fontSize }}>
-        {discountedPrice}원
-      </DiscountedPrice>
+      <DiscountedPrice>{discountedPrice}원</DiscountedPrice>
     </div>
   );
 }
