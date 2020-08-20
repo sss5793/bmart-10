@@ -1,4 +1,5 @@
 import React from "react";
+import { Fold } from "../common";
 
 function DeliveryTip(): JSX.Element {
   return (
@@ -63,12 +64,14 @@ function DeliveryLocation(): JSX.Element {
 
 export default function DeliveryInfo(): JSX.Element {
   return (
-    <table>
-      <tbody>
-        <DeliveryTip></DeliveryTip>
-        <DeliveryMethod></DeliveryMethod>
-        <DeliveryLocation></DeliveryLocation>
-      </tbody>
-    </table>
+    <Fold title="배달 정보">
+      <table>
+        <tbody>
+          <DeliveryTip></DeliveryTip>
+          <DeliveryMethod></DeliveryMethod>
+          <DeliveryLocation></DeliveryLocation>
+        </tbody>
+      </table>
+    </Fold>
   );
 }

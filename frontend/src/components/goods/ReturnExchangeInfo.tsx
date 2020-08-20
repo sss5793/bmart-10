@@ -1,4 +1,5 @@
 import React from "react";
+import { Fold } from "../common";
 
 function Case1(): JSX.Element {
   return (
@@ -63,11 +64,13 @@ function Case2(): JSX.Element {
 
 export default function ReturnExchangeInfo(): JSX.Element {
   return (
-    <table>
-      <tbody>
-        <Case1></Case1>
-        <Case2></Case2>
-      </tbody>
-    </table>
+    <Fold style={{ marginTop: "-1px" }} title="반품 및 교환 정보">
+      <table>
+        <tbody>
+          <Case1></Case1>
+          <Case2></Case2>
+        </tbody>
+      </table>
+    </Fold>
   );
 }
