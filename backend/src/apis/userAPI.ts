@@ -100,7 +100,6 @@ router.get("/test", passport.authenticate("jwt", { session: false }), function (
   response: Response
 ) {
   const user = request.user;
-  console.log(user);
   response.json(user);
 });
 

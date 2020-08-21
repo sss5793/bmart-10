@@ -1,6 +1,5 @@
 import mysql, { RowDataPacket } from "mysql2/promise";
 import DAO from "./data-access-object";
-import { UserCheck } from "../types/dto/user.dto";
 import poolOption from "./pool-option";
 
 import {
@@ -78,7 +77,7 @@ class UserDAO extends DAO {
   }
   async getUserByEmail(email: string) {
     const result = await this.getOneInfo(SEARCH_USER_INFO, [email]);
-    return { ...result };
+    return result;
   }
 }
 
