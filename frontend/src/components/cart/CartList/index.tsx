@@ -2,22 +2,15 @@ import React from "react";
 import style from "styled-components";
 
 import CartItem from "./CartItem";
+import { CartItemType } from "../../../types/Cart";
 
 const ListWrapper = style.div`
   width: 100%;
   padding: 15px;
 `;
 
-type Item = {
-  goodId?: number;
-  title: string;
-  price: string;
-  sale: string;
-  src: string;
-};
-
 type Props = {
-  data: Array<Item>;
+  data: Array<CartItemType>;
 };
 
 const CartList = (props: Props): JSX.Element => {
@@ -26,7 +19,7 @@ const CartList = (props: Props): JSX.Element => {
   return (
     <ListWrapper>
       {data.map((item, index) => (
-        <CartItem key={index + item.title} {...item} />
+        <CartItem key={index + item.name} {...item} />
       ))}
     </ListWrapper>
   );
