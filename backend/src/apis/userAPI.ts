@@ -95,6 +95,24 @@ router.post(
   }
 );
 
+router.get("/email/:email", async (request: Request, response: Response) => {
+  const email = request.params.email.trim();
+
+  const apiResponse: APIResponse = {
+    success: false,
+  };
+
+  if (!email) {
+    return response.status(404).send(apiResponse);
+  }
+
+  const result = await userDAO.getUserByEmail(email);
+  apiResponse.success = true;
+  apiResponse.isUserEmail = result !== undefined;
+
+  response.status(200).send(apiResponse);
+});
+
 router.get("/test", passport.authenticate("jwt", { session: false }), function (
   request: Request,
   response: Response
