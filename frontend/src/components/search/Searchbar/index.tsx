@@ -20,13 +20,35 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 
+function setHistory(query: string): void {
+  const searchHistory: string = localStorage.searchHistory;
+
+  const historyList = {
+    history: new Array<string>(),
+  };
+
+  if (searchHistory) {
+    const beforeHistory: { history: string[] } = JSON.parse(searchHistory);
+    historyList.history = beforeHistory.history;
+  }
+
+  historyList.history.push(query);
+  if (historyList.history.length > 5) {
+    historyList.history.splice(0, 1);
+  }
+
+  localStorage.searchHistory = JSON.stringify(historyList);
+}
+
 export default function SearchBar(): JSX.Element {
   const [showDelete, setShowDelete] = useState(false);
   const [query, setQuery] = useState("");
 
   const dispatch = useSearchDispatch();
 
-  function search(query: string) {
+  function search(query: string): void {
+    setHistory(query);
+
     getGoodsByName(query).then((res) => {
       if (res.success) {
         dispatch({ type: "SET_GOODS", goods: res.data.goods });
