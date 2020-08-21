@@ -15,8 +15,8 @@ const BtnWrapper = style.div`
 
 const Btn = style.button`
   width: 100%;
-  border: 1px solid ${COLOR.YELLOW_1};
-  background: ${COLOR.WHITE};
+  border: 1px solid ${COLOR.GREEN_1};
+  background: ${COLOR.GREEN_1};
   padding: 10px;
   border-radius: 5px;
   font-weight: 600;
@@ -31,8 +31,8 @@ const Btn = style.button`
 const Count = style.div`
   width: 25px;
   height: 25px;
-  background: ${COLOR.YELLOW_1};
-  color: ${COLOR.WHITE};
+  background: ${COLOR.WHITE};
+  color: ${COLOR.GREEN_1};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +41,7 @@ const Count = style.div`
 `;
 
 const Price = style.div`
-  color: ${COLOR.BLACK};
+  color: ${COLOR.WHITE};
 `;
 
 const OrderBtn = (props: Props): JSX.Element => {
