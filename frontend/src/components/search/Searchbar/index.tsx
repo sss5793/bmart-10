@@ -26,6 +26,14 @@ export default function SearchBar(): JSX.Element {
 
   const dispatch = useSearchDispatch();
 
+  function search(query: string) {
+    getGoodsByName(query).then((res) => {
+      if (res.success) {
+        dispatch({ type: "SET_GOODS", goods: res.data.goods });
+      }
+    });
+  }
+
   function updateFilter(event: React.KeyboardEvent<HTMLInputElement>): void {
     const filter = (event.target as HTMLInputElement).value;
     setQuery(filter);
@@ -51,21 +59,25 @@ export default function SearchBar(): JSX.Element {
     setShowDelete(false);
   }
 
+  function searchByEnter(event: React.KeyboardEvent<HTMLInputElement>): void {
+    if (event.keyCode !== 13) return;
+
+    search(query);
+  }
+
   return (
     <Wrapper>
       <FixedBox>
-        <Input placeholder="상품 검색" onKeyUp={updateFilter} />
+        <Input
+          placeholder="상품 검색"
+          onKeyUp={updateFilter}
+          onKeyDown={searchByEnter}
+        />
         <DeleteButton onClick={deleteFilter} show={showDelete} />
-
         <SearchIcon
           onClick={(): void => {
             if (query.length === 0) return;
-
-            getGoodsByName(query).then((res) => {
-              if (res.success) {
-                dispatch({ type: "SET_GOODS", goods: res.data.goods });
-              }
-            });
+            search(query);
           }}
         />
       </FixedBox>
