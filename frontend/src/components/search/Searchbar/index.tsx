@@ -8,6 +8,7 @@ import DeleteButton from "./DeleteButton";
 
 import { useSearchDispatch } from "../../../contexts/SearchContext";
 
+import { setHistory } from "../../../utils/localstorage";
 import getGoodsByName from "../../../fetch/goods/getGoodsByName";
 
 const Wrapper = styled.div`
@@ -20,26 +21,6 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 
-function setHistory(query: string): void {
-  const searchHistory: string = localStorage.searchHistory;
-
-  const historyList = {
-    history: new Array<string>(),
-  };
-
-  if (searchHistory) {
-    const beforeHistory: { history: string[] } = JSON.parse(searchHistory);
-    historyList.history = beforeHistory.history;
-  }
-
-  historyList.history.push(query);
-  if (historyList.history.length > 5) {
-    historyList.history.splice(0, 1);
-  }
-
-  localStorage.searchHistory = JSON.stringify(historyList);
-}
-
 export default function SearchBar(): JSX.Element {
   const [showDelete, setShowDelete] = useState(false);
   const [query, setQuery] = useState("");
@@ -48,6 +29,7 @@ export default function SearchBar(): JSX.Element {
 
   function search(query: string): void {
     setHistory(query);
+    dispatch({ type: "SET_SHOW_HISTORY", showHistory: false });
 
     getGoodsByName(query).then((res) => {
       if (res.success) {
@@ -94,6 +76,9 @@ export default function SearchBar(): JSX.Element {
           placeholder="상품 검색"
           onKeyUp={updateFilter}
           onKeyDown={searchByEnter}
+          onClick={(): void => {
+            dispatch({ type: "SET_SHOW_HISTORY", showHistory: true });
+          }}
         />
         <DeleteButton onClick={deleteFilter} show={showDelete} />
         <SearchIcon
