@@ -1,5 +1,6 @@
 import mysql, { RowDataPacket } from "mysql2/promise";
 import DAO from "./data-access-object";
+import { UserCheck } from "../types/dto/user.dto";
 import poolOption from "./pool-option";
 
 import {
@@ -11,9 +12,14 @@ const CREATE_USER = `
     INSERT INTO users (email, user_name, password, salt) 
     VALUES (?, ?, ?, ?)`;
 
-const SEARCH_USER = `
+const SEARCH_USER_NAME_SALT_PWD = `
     SELECT user_name as name, salt, password 
     FROM users WHERE email = ?
+`;
+
+const SEARCH_USER_INFO = `
+  SELECT email, user_name AS name, type, delete_flag AS deleteFlag, vip_flag AS vipFlag, wish_array AS wishArray
+  FROM users WHERE email = ?
 `;
 
 class UserDAO extends DAO {
@@ -39,6 +45,13 @@ class UserDAO extends DAO {
     return result;
   }
 
+  async getOneInfo(query: string, params: Array<string>) {
+    const connection = await this.getConnection();
+    const rows = await connection.execute<RowDataPacket[]>(query, params);
+    const result = rows[0][0];
+    return result;
+  }
+
   async createUser(
     email: string,
     userName: string,
@@ -52,11 +65,7 @@ class UserDAO extends DAO {
   }
 
   async loginUser(email: string, password: string) {
-    const connection = await this.getConnection();
-    const rows = await connection.execute<RowDataPacket[]>(SEARCH_USER, [
-      email,
-    ]);
-    const result = rows[0][0];
+    const result: any = this.getOneInfo(SEARCH_USER_NAME_SALT_PWD, [email]);
     if (!result) return false;
 
     const encryptedPassword = await getEncryptedPasswordWithSalt(
@@ -65,9 +74,12 @@ class UserDAO extends DAO {
     );
     if (result.password !== encryptedPassword) return false;
 
-    return { name: result.name };
+    return { name: result.name, email };
   }
-  async getUserByEmail(email: string) {}
+  async getUserByEmail(email: string) {
+    const result = await this.getOneInfo(SEARCH_USER_INFO, [email]);
+    return { ...result };
+  }
 }
 
 export default new UserDAO(poolOption);
