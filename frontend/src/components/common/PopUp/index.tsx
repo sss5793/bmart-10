@@ -40,6 +40,7 @@ const Content = style.div`
   justify-content: center;
   padding: 15px;
   white-space:pre-line;
+  text-align: center;
 `;
 
 const ConfirmBtn = style.div`

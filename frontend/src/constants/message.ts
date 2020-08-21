@@ -57,4 +57,5 @@ export const KEY_NAME: CategoryType = {
 
 export const MESSAGE = {
   LOGIN_INDUCE: "로그인 후 주문이 가능합니다. \n 로그인 후 주문하시겠습니까?",
+  ADD_CART: "장바구니에 상품을 담았습니다. \n 장바구니 페이지로 이동하시겠습니까?",
 };
