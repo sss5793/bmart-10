@@ -9,9 +9,9 @@ import {
   CartTotal,
   NotCartItem,
 } from "../components/cart";
-import { getItems } from "../mock";
 import { PopUpContext } from "../context";
 import { MESSAGE } from "../constants/message";
+import { CartItemType } from "../types/Cart";
 
 const FakeComp = style.div`
   height: 80px;
@@ -20,7 +20,9 @@ const FakeComp = style.div`
 const Cart = (): JSX.Element => {
   // totalPrice, deliveryTips - context api
   // cartItemList - context api
-  const data = getItems(3);
+  const storage: string | null = localStorage.getItem("cart_list");
+  const data: Array<CartItemType> = JSON.parse(storage || "[]");
+  // console.log(data);
   const isCart = data.length > 0 ? true : false; // 장바구니에 담긴 상품이 있는지 여부
 
   const history = useHistory();

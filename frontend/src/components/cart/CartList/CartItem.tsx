@@ -3,14 +3,7 @@ import style from "styled-components";
 
 import { COLOR } from "../../../constants/style";
 import { CheckBox } from "../../common";
-
-type Item = {
-  goodId?: number;
-  title: string;
-  price: string;
-  sale: string;
-  src: string;
-};
+import { CartItemType } from "../../../types/Cart";
 
 const ItemWrapper = style.div`
   width: 100%;
@@ -92,49 +85,46 @@ const CounterItem = style.div`
   align-items: center;
 `;
 
-const CartItem = (props: Item): JSX.Element => {
-  const { title, price, sale, src } = props;
-  const [isChecked, setIsChecked] = useState(false);
-  const [cnt, setCount] = useState(0);
-
-  const percent: number = parseInt(sale) || 0;
+const CartItem = (props: CartItemType): JSX.Element => {
+  const { name, cost, discount, cnt, imageUrl, isChecked } = props;
+  // const [isChecked, setIsChecked] = useState(isChecked);
+  // const [count, setCount] = useState(0);
 
   const onChecked = (): void => {
-    setIsChecked((state) => !state);
+    // setIsChecked((state) => !state);
   };
 
   const minusAction = (): void => {
-    if (cnt < 1) return;
-    setCount((state) => state - 1);
+    // if (cnt < 1) return;
+    // setCount((state) => state - 1);
   };
 
   const plusAction = (): void => {
-    setCount((state) => state + 1);
+    // setCount((state) => state + 1);
   };
 
-  const salePrice =
-    parseInt(price) - Math.round(parseInt(price) * (percent * 0.01));
+  const salePrice = cost - Math.round(cost * (discount * 0.01));
 
   return (
     <ItemWrapper>
       <TitleWrapper>
         <CheckBoxWrapper onClick={onChecked}>
           <CheckBox isChecked={isChecked} />
-          <p>{title}</p>
+          <p>{name}</p>
         </CheckBoxWrapper>
         <DeleteBtn>삭제</DeleteBtn>
       </TitleWrapper>
       <ContentWrapper>
         <ImgWrapper>
-          <img src={src} />
+          <img src={imageUrl} />
         </ImgWrapper>
         <PriceWrapper>
           <div>
-            <Price>({price}원)</Price>
+            <Price>({cost}원)</Price>
             <SaleWrapper>
-              {percent !== 0 && (
+              {discount !== 0 && (
                 <Price style={{ textDecoration: "line-through" }}>
-                  {price}원
+                  {cost}원
                 </Price>
               )}
               <Sale>{salePrice}원</Sale>
