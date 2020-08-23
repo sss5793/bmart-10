@@ -95,6 +95,76 @@ router.post(
   }
 );
 
+/**
+ * @api {get} /api/user/email/:email 이메일 중복 여부 확인
+ * @apiName UserEmailCheck
+ * @apiGroup User
+ *
+ * @apiParam {String} email
+ *
+ * @apiSuccess {Boolean} success API 성공 여부
+ * @apiSuccess {Boolean} isUserEmail 포함된 객체
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true,
+ *       "isUserEmail": true || false
+ *     }
+ *
+ * @apiError NotFound
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "success": false,
+ *     }
+ */
+router.get("/email/:email", async (request: Request, response: Response) => {
+  const email = request.params.email.trim();
+
+  const apiResponse: APIResponse = {
+    success: false,
+  };
+
+  if (!email) {
+    return response.status(404).send(apiResponse);
+  }
+
+  const result = await userDAO.getUserByEmail(email);
+  apiResponse.success = true;
+  apiResponse.isUserEmail = result !== undefined;
+
+  response.status(200).send(apiResponse);
+});
+
+/**
+ * @api {post} /api/user/test user test url
+ * @apiName UserTest
+ * @apiGroup User
+ *
+ * @apiHeader {string} Content-Type application/json
+ * @apiHeader {string} Authorization Bearer tokenText
+ *
+ * @apiSuccess {Boolean} success API 성공 여부
+ * @apiSuccess {Object} data name token 포함된 객체
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "email":
+ *       "name":
+ *       "type":
+ *       "deleteFlag":
+ *       "vipFlag":
+ *       "wishArray":
+ *     }
+ *
+ * @apiError Unauthorized
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 401 Unauthorized
+ */
 router.get("/test", passport.authenticate("jwt", { session: false }), function (
   request: Request,
   response: Response
