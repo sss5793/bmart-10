@@ -55,4 +55,59 @@ router.get("/list/:main", async (request: Request, response: Response) => {
   response.status(200).send(apiResponse);
 });
 
+/**
+ * @api {get} /api/category/goods/:main 메인 카테고리 이름으로 상품을 가져온다.
+ * @apiName GoodsInMainCategory by main
+ * @apiGroup Category
+ *
+ * @apiParam {String} main
+ *
+ * @apiSuccess {Boolean} success API 성공 여부
+ * @apiSuccess {Array} data 해당 메인 카테고리의 상품 정보 배열
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true,
+ *       "data" : [
+ *           {"goodId": number, "title": string, "price": string, "sale": string, "src": string}
+ *       ]
+ *     }
+ *
+ * @apiError NotFound
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "success": false,
+ *     }
+ */
+router.get("/goods/:main", async (request: Request, response: Response) => {
+  const startIdx = parseInt(request.query.startIdx as string) || undefined;
+  const offset = parseInt(request.query.offset as string) || undefined;
+
+  const { main } = request.params;
+  const apiResponse: APIResponse = {
+    success: false,
+  };
+
+  if (!main) {
+    return response.status(404).send(apiResponse);
+  }
+
+  const result = await categoryDAO.getSubCategoryNameList(main);
+  if (!result) {
+    return response.status(404).send(apiResponse);
+  }
+  const goods = await categoryDAO.getGoodsInMainCategory(
+    result.data,
+    startIdx,
+    offset
+  );
+
+  apiResponse.success = true;
+  apiResponse.data = goods;
+  response.status(200).send(apiResponse);
+});
+
 export default router;
