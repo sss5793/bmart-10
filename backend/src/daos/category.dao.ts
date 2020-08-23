@@ -3,16 +3,25 @@ import DAO from "./data-access-object";
 import poolOption from "./pool-option";
 import { Query } from "../util/query";
 
-const SEARCH_SUBCATEGORY_INFO = `SELECT no, name FROM sub_category WHERE name = ? `;
-const SEARCH_SUBCATEGORY_NAME_LIST = `SELECT name, sub_category_array as data FROM main_category WHERE title = ? `;
+const SEARCH_SUB_CATEGORY_INFO = `SELECT no, name FROM sub_category WHERE name = ? `;
+const SEARCH_SUB_CATEGORY_NAME_LIST = `SELECT name, sub_category_array as data FROM main_category WHERE title = ? `;
+const SEARCH_SUB_CATEGORY_NAME = `SELECT name FROM sub_category where no=?`;
 
-const SEARCH_MAINCATEGORY_GOODS = `
+const SEARCH_MAIN_CATEGORY_GOODS = `
   SELECT
     good_id AS goodId, title, category_name AS categoryName,
     created_at AS createdAt, cost, discount, amount,
     image_url AS imageUrl, order_cnt AS orderCnt
   FROM goods 
   WHERE delete_flag = 0 AND category_name IN `;
+
+const SEARCH_SUB_CATEGORY_GOODS = `
+  SELECT
+    good_id AS goodId, title, category_name AS categoryName,
+    created_at AS createdAt, cost, discount, amount,
+    image_url AS imageUrl, order_cnt AS orderCnt
+  FROM goods 
+  WHERE delete_flag = 0 AND category_name = ?`;
 
 type SubCategoryNameList = {
   name: string;
@@ -56,14 +65,14 @@ class CategoryDAO extends DAO {
   async getSubCategoryNameList(
     mainTitle: string
   ): Promise<SubCategoryNameList | undefined> {
-    const result = await this.getOneInfo(SEARCH_SUBCATEGORY_NAME_LIST, [
+    const result = await this.getOneInfo(SEARCH_SUB_CATEGORY_NAME_LIST, [
       mainTitle,
     ]);
     return result;
   }
   async getSubCategoryInfo(name: string): Promise<SubCategoryInfo> {
     const result: SubCategoryInfo = await this.getOneInfo(
-      SEARCH_SUBCATEGORY_INFO,
+      SEARCH_SUB_CATEGORY_INFO,
       [name]
     );
     return result;
@@ -74,11 +83,26 @@ class CategoryDAO extends DAO {
     offset?: number
   ) {
     const result = await this.getInfo(
-      Query.of(SEARCH_MAINCATEGORY_GOODS)
+      Query.of(SEARCH_MAIN_CATEGORY_GOODS)
         .placeHolder(subCategoryArr.length)
         .limit(startIdx, offset)
         .build(),
       subCategoryArr
+    );
+    return result;
+  }
+  async getSubCategoryName(subNo: string) {
+    const result = await this.getOneInfo(SEARCH_SUB_CATEGORY_NAME, [subNo]);
+    return result?.name;
+  }
+  async getGoodsInSubCategory(
+    subCategoryName: string,
+    startIdx?: number,
+    offset?: number
+  ) {
+    const result = await this.getInfo(
+      Query.of(SEARCH_SUB_CATEGORY_GOODS).limit(startIdx, offset).build(),
+      [subCategoryName]
     );
     return result;
   }
