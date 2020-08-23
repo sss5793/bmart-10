@@ -46,8 +46,12 @@ router.get("/list/:main", async (request: Request, response: Response) => {
   if (!result) {
     return response.status(404).send(apiResponse);
   }
+  const subCategoryInfoArr = await Promise.all(
+    result.data.map((one) => categoryDAO.getSubCategoryInfo(one))
+  );
+
   apiResponse.success = true;
-  apiResponse.data = [...result.data];
+  apiResponse.data = [...subCategoryInfoArr];
   response.status(200).send(apiResponse);
 });
 

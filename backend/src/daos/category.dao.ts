@@ -2,12 +2,21 @@ import mysql, { RowDataPacket } from "mysql2/promise";
 import DAO from "./data-access-object";
 import poolOption from "./pool-option";
 
+const SEARCH_SUBCATEGORY_INFO = `select no, name from sub_category where name = ?`;
 const SEARCH_SUBCATEGORY_NAME_LIST = `select name, sub_category_array as data from main_category where title = ?`;
 
-type SubCategoryList = {
+type SubCategoryNameList = {
   name: string;
   data: Array<string>;
 };
+
+type SubCategoryInfo =
+  | {
+      no: number;
+      name: string;
+    }
+  | undefined;
+
 class CategoryDAO extends DAO {
   constructor(option: mysql.PoolOptions) {
     super(option);
@@ -26,10 +35,17 @@ class CategoryDAO extends DAO {
   }
   async getSubCategoryNameList(
     mainTitle: string
-  ): Promise<SubCategoryList | undefined> {
+  ): Promise<SubCategoryNameList | undefined> {
     const result = await this.getOneInfo(SEARCH_SUBCATEGORY_NAME_LIST, [
       mainTitle,
     ]);
+    return result;
+  }
+  async getSubCategoryInfo(name: string): Promise<SubCategoryInfo> {
+    const result: SubCategoryInfo = await this.getOneInfo(
+      SEARCH_SUBCATEGORY_INFO,
+      [name]
+    );
     return result;
   }
 }
