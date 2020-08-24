@@ -11,9 +11,14 @@ jobs:
   deploy:
     name: DEPLOY
     runs-on: ubuntu-18.04
-
+    
     steps:
       - uses: actions/checkout@v2
+        
+      - name: Display the path
+        run: echo $PATH
+        shell: bash
+
       - name: stop server via ssh and build
         uses: appleboy/ssh-action@master
         with:
@@ -22,11 +27,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             pm2 stop bmart-server
-            cd project/bmart-10
+            pm2 stop index
+            cd project/git-action-test
             git pull origin release
-            cd /frontend
+            cd frontend
             yarn install
             yarn build
             cd ../backend
             yarn install
             pm2 start bmart-server
+            pm2 start index
